@@ -2,31 +2,23 @@ package com.prime.interest.Entity;
 
 import java.time.LocalDateTime;
 
-import com.prime.interest.Entity.Community;
-import com.prime.interest.Entity.User;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "activities")
-public class Activity {
+@Data
+public class CommunityMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    private String description;
-
-    private String type;
-
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "community_id")
     private Community community;
 
     private LocalDateTime createdAt;
