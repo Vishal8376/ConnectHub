@@ -1,234 +1,499 @@
-# Interest-based-networking-platform
+# 🌐 ConnectHub
 
-## Overview
+> **A Community-Driven Networking and Collaboration Platform**
 
-The Interest-Based Networking Platform is a full-stack web application designed to help users discover and connect with people who share similar interests, communities, and collaboration goals.
-
-Unlike traditional social media platforms that focus on content feeds and follower counts, this platform emphasizes:
-
-- Purpose-driven networking
-- Community-based interaction
-- Interest-oriented recommendations
-- Structured collaboration activities
-
-The system allows users to:
-- Register and manage profiles
-- Select interests
-- Create and join communities
-- Participate in activities/discussions
-- Discover users with similar interests
+ConnectHub is a modern full-stack web application that brings together **networking, collaboration, community management, and knowledge sharing** into a single platform. Unlike traditional social networking applications that focus primarily on individual users or professional networking, ConnectHub is designed around **communities**, enabling users to connect, collaborate, and engage in meaningful discussions based on shared interests.
 
 ---
 
-# Tech Stack
+## 📖 Overview
 
-## Backend
-- Java
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- MySQL
+Today's users rely on multiple applications for different activities:
 
-## Frontend
-- React.js
-- Axios
-- HTML/CSS
+- 💬 WhatsApp – Messaging
+- 📸 Instagram – Content Sharing
+- 💼 LinkedIn – Professional Networking
+- 🎮 Discord – Community Discussions
+- 📂 Google Drive – Resource Sharing
 
-## Database
-- MySQL
+This fragmented workflow makes communication and collaboration inefficient.
 
----
+**ConnectHub** addresses this challenge by providing a unified platform where users can:
 
-# Features
-
-## User Management
-- User registration
-- User login
-- View user profile
-- Update user details
-- Delete user
-
-## Interest Management
-- Add interests
-- View interests
-- Associate interests with users and communities
-
-## Community Management
-- Create communities
-- Join communities
-- Leave communities
-- View joined communities
-- Discover communities
-
-## Activity Management
-
-Activities represent:
-- Discussions
-- Collaboration requests
-- Mentorship requests
-- Networking opportunities
-
-Features include:
-- Create activity
-- View community activities
-- Delete activity
-
-## Recommendation System
-
-The platform recommends users based on:
-- Shared interests
-- Common networking context
-
-Users with similar interests are suggested as potential connections.
+- Build professional and personal connections
+- Join or create interest-based communities
+- Share posts and updates
+- Participate in discussions
+- Exchange resources
+- Receive notifications
+- Collaborate on projects
 
 ---
 
-# Project Structure
+# ✨ Key Features
 
-src/main/java/com/prime/interest
+## 🔐 Authentication & Security
 
-├── Controller  
-│   ├── UserController  
-│   ├── CommunityController  
-│   ├── InterestController  
-│   └── ActivityController  
-
-├── Entity  
-│   ├── User  
-│   ├── Interest  
-│   ├── Community  
-│   ├── CommunityMember  
-│   └── Activity  
-
-├── Repository  
-│   ├── UserRepository  
-│   ├── InterestRepository  
-│   ├── CommunityRepository  
-│   ├── CommunityMemberRepository  
-│   └── ActivityRepository  
-
-├── Service  
-│   ├── UserService  
-│   ├── CommunityService  
-│   ├── InterestService  
-│   └── ActivityService  
+- User Registration
+- Secure Login
+- Password Encryption using BCrypt
+- Spring Security Authentication
+- Role-Based Authorization
 
 ---
 
-# Database Design
+## 👤 User Profiles
 
-## Main Entities
+- Create Profile
+- Edit Profile
+- Profile Picture
+- Bio
+- Skills & Interests
+- View Other Profiles
 
-### User
-Stores:
-- username
-- email
-- password
-- interests
-- joined communities
+---
 
-### Interest
-Represents categories such as:
-- AI
-- React
-- Spring Boot
-- Cybersecurity
+## 👥 Communities
 
-### Community
-Represents networking groups based on interests.
+Users can:
+
+- Create Communities
+- Join Communities
+- Leave Communities
+- Manage Communities
+- Public & Private Communities
+- Community Admin Roles
 
 Examples:
-- AI Enthusiasts
-- React Developers
 
-### CommunityMember
-Tracks which users joined which communities.
-
-### Activity
-Represents structured interactions such as:
-- discussions
-- collaboration requests
-- mentorship opportunities
+- Programming
+- Photography
+- Music
+- Sports
+- College Clubs
+- Hackathons
+- Startups
 
 ---
 
-# API Endpoints
+## 📰 Personal Feed
 
-## User APIs
+Users can publish:
 
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| POST | /api/users/register | Register user |
-| POST | /api/users/login | Login user |
-| GET | /api/users/{id} | Get user by ID |
-| PUT | /api/users/update | Update user |
-| DELETE | /api/users/delete/{id} | Delete user |
-| GET | /api/users/recommend/{userId} | Recommend users |
+- Achievements
+- Updates
+- Thoughts
+- Project Progress
+- Announcements
 
----
-
-## Interest APIs
-
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| POST | /api/interests/add | Add interest |
-| GET | /api/interests/{id} | Get interest |
-| PUT | /api/interests/update/{id} | Update interest |
-| DELETE | /api/interests/delete/{id} | Delete interest |
+Visible to their connections.
 
 ---
 
-## Community APIs
+## 🌍 Community Feed
 
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| POST | /api/communities/add | Create community |
-| POST | /api/communities/join | Join community |
-| DELETE | /api/communities/leave | Leave community |
-| GET | /api/communities/user/{userId} | Joined communities |
+Each community has its own feed.
 
----
+Members can:
 
-## Activity APIs
-
-| Method | Endpoint | Description |
-|--------|-----------|-------------|
-| POST | /api/activities/create | Create activity |
-| GET | /api/activities/community/{communityId} | View activities |
-| DELETE | /api/activities/delete/{id} | Delete activity |
+- Publish Posts
+- Share Resources
+- Discuss Topics
+- Ask Questions
+- Make Announcements
 
 ---
 
-# Recommendation Logic
+## ❤️ Social Interactions
 
-The recommendation system uses shared interests to connect users.
-
-Users with matching interests are recommended to each other.
-
----
-
-# Future Enhancements
-
-Possible future improvements:
-- JWT authentication
-- Real-time chat
-- Advanced recommendation engine
-- Activity comments
+- Like Posts
+- Comment on Posts
+- Connection Requests
 - Notifications
-- Search and filtering
-- AI-based matchmaking
 
 ---
 
-# Conclusion
+## 🔍 Search
 
-The Interest-Based Networking Platform demonstrates how meaningful digital networking can be achieved through structured communities, interest-based recommendations, and collaboration-oriented activities rather than traditional social media feeds.
+Search for:
 
-The project showcases:
-- Full-stack development
-- REST API design
-- Database relationships
-- Recommendation logic
-- Community interaction workflows
+- Users
+- Communities
 
-using Spring Boot and React architecture.
+---
+
+## 🔔 Notifications
+
+Receive notifications for:
+
+- Connection Requests
+- Community Invitations
+- Likes
+- Comments
+- Community Activities
+
+---
+
+# 🏗️ System Architecture
+
+```
+                 User
+
+                   │
+
+          React Frontend
+
+                   │
+             Axios API Calls
+
+                   │
+
+         Spring Boot REST API
+
+       ┌────────────┬────────────┬────────────┐
+       │ Controller │  Service   │ Repository │
+       └────────────┴────────────┴────────────┘
+
+                   │
+
+          Spring Data JPA
+
+                   │
+
+                MySQL
+```
+
+---
+
+# 🛠️ Technology Stack
+
+| Layer | Technology |
+|--------|------------|
+| Frontend | React.js |
+| Backend | Spring Boot |
+| Database | MySQL |
+| ORM | Spring Data JPA |
+| Authentication | Spring Security |
+| HTTP Client | Axios |
+| Build Tool | Maven |
+| API Testing | Postman |
+| Version Control | Git & GitHub |
+
+---
+
+# 📂 Project Modules
+
+## Authentication Module
+
+- Registration
+- Login
+- Logout
+- Password Encryption
+
+---
+
+## User Module
+
+- User Profiles
+- Edit Profile
+- Connections
+
+---
+
+## Community Module
+
+- Create Community
+- Join Community
+- Manage Members
+
+---
+
+## Post Module
+
+Supports:
+
+- Personal Feed Posts
+- Community Feed Posts
+
+Each post supports:
+
+- Likes
+- Comments
+
+---
+
+## Notification Module
+
+- Likes
+- Comments
+- Community Invites
+- Connection Requests
+
+---
+
+## Search Module
+
+- Search Users
+- Search Communities
+
+---
+
+# 🗄️ Database Design
+
+## User
+
+```
+id
+name
+email
+password
+bio
+profile_picture
+created_at
+```
+
+---
+
+## Community
+
+```
+id
+name
+description
+created_by
+visibility
+created_at
+```
+
+---
+
+## CommunityMember
+
+```
+id
+community_id
+user_id
+role
+joined_at
+```
+
+---
+
+## Post
+
+```
+id
+content
+image_url
+author_id
+community_id
+created_at
+```
+
+---
+
+## Comment
+
+```
+id
+post_id
+user_id
+content
+created_at
+```
+
+---
+
+## Like
+
+```
+id
+post_id
+user_id
+created_at
+```
+
+---
+
+## Connection
+
+```
+id
+sender_id
+receiver_id
+status
+```
+
+---
+
+## Notification
+
+```
+id
+user_id
+message
+type
+is_read
+created_at
+```
+
+---
+
+# 📌 Functional Requirements
+
+- User Registration
+- Secure Login
+- Profile Management
+- Community Creation
+- Join Communities
+- Community Administration
+- Personal Feed
+- Community Feed
+- Create Posts
+- Like & Comment
+- User Search
+- Community Search
+- Notifications
+- Connection Requests
+
+---
+
+# 🔒 Non-Functional Requirements
+
+- Secure Authentication
+- Responsive UI
+- Scalable Architecture
+- Maintainable Codebase
+- Reliable Database
+- Fast API Responses
+- RESTful Design
+
+---
+
+# 🎯 Target Users
+
+- College Students
+- Universities
+- Technical Communities
+- Clubs
+- Organizations
+- Alumni Networks
+- Startups
+- Open Source Contributors
+- Hackathon Teams
+
+---
+
+# 🚀 Why ConnectHub?
+
+Unlike existing platforms:
+
+| Platform | Primary Focus |
+|----------|---------------|
+| Instagram | Personal Content |
+| LinkedIn | Professional Networking |
+| Discord | Communication |
+| Reddit | Anonymous Discussions |
+| **ConnectHub** | **Community Collaboration + Networking** |
+
+ConnectHub combines:
+
+- Communities
+- Social Networking
+- Collaboration
+- Discussions
+- Knowledge Sharing
+- Resource Management
+
+into a single platform.
+
+---
+
+# 📈 Future Enhancements
+
+- 💬 Real-Time Chat (WebSockets)
+- 🤖 AI Community Recommendations
+- 📅 Event Management
+- 📱 Mobile Application
+- ☁️ Cloud Deployment
+- 📧 Email Notifications
+- 📊 Community Analytics Dashboard
+- 📁 File Sharing
+
+---
+
+# 📅 Development Roadmap
+
+### Phase 1
+
+- Project Setup
+- Authentication
+- Database Design
+
+### Phase 2
+
+- User Profiles
+- Community Module
+
+### Phase 3
+
+- Posts
+- Likes
+- Comments
+
+### Phase 4
+
+- Connections
+- Notifications
+- Search
+
+### Phase 5
+
+- Testing
+- Deployment
+- Documentation
+
+---
+
+# 📚 Learning Outcomes
+
+This project demonstrates practical knowledge of:
+
+- Full-Stack Development
+- React.js
+- Spring Boot
+- REST APIs
+- Spring Security
+- Database Design
+- Authentication & Authorization
+- MVC Architecture
+- JPA & Hibernate
+- API Integration
+- Git & GitHub
+- Software Engineering Best Practices
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch.
+5. Open a Pull Request.
+
+---
+
+# 📄 License
+
+This project is developed for educational purposes as part of a Full-Stack Development Mini Project.
+
+---
+
+# 👨‍💻 Author
+
+**Vishal**
+
+**ConnectHub** – *Building Communities, Connecting People.*
