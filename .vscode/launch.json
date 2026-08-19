@@ -1,21 +1,17 @@
 {
     "configurations": [
         {
+            "type": "java",
+            "name": "ConnecthubApplication",
+            "request": "launch",
+            "mainClass": "com.example.connecthub.ConnecthubApplication"
+        },
+        {
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
             "url": "http://localhost",
             "webRoot": "${workspaceFolder}"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-InterestApplication<interest>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.prime.interest.InterestApplication",
-            "projectName": "interest",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
