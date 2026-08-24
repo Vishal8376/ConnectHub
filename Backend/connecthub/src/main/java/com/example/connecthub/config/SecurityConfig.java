@@ -66,6 +66,7 @@ public class SecurityConfig {
                                                                 "/api/admin/**")
                                                 .hasRole("ADMIN")
 
+                                                .requestMatchers("/ws/**").permitAll()
                                                 // Everything else
                                                 .anyRequest().authenticated())
 

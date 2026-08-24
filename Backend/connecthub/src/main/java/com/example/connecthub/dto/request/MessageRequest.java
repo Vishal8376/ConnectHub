@@ -10,8 +10,6 @@ import lombok.*;
 @Builder
 public class MessageRequest {
 
-    private Long conversationId;
-
     private Long receiverId;
 
     @NotBlank(message = "Message content cannot be empty")

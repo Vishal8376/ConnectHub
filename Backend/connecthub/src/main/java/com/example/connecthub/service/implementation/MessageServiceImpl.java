@@ -4,6 +4,10 @@ import com.example.connecthub.dto.response.MessageResponse;
 import com.example.connecthub.entity.Conversation;
 import com.example.connecthub.entity.Message;
 import com.example.connecthub.entity.User;
+import com.example.connecthub.enums.ConnectionStatus;
+import com.example.connecthub.exception.ChatAccessDeniedException;
+import com.example.connecthub.exception.ConversationNotFoundException;
+import com.example.connecthub.repository.ConnectionRepository;
 import com.example.connecthub.repository.ConversationRepository;
 import com.example.connecthub.repository.MessageRepository;
 import com.example.connecthub.service.MessageService;
@@ -19,6 +23,7 @@ public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
     private final ConversationRepository conversationRepository;
+    private final ConnectionRepository connectionRepository;
 
     @Override
     public MessageResponse saveMessage(
@@ -41,7 +46,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<MessageResponse> getMessages(Conversation conversation) {
+    public List<MessageResponse> getMessages(
+            Conversation conversation) {
 
         return messageRepository
                 .findByConversationOrderBySentAtAsc(conversation)
@@ -65,19 +71,91 @@ public class MessageServiceImpl implements MessageService {
                                         .userOne(userOne)
                                         .userTwo(userTwo)
                                         .build()
-                        )
-                );
+                        ));
     }
 
-    private MessageResponse mapToResponse(Message message) {
+    @Override
+    public boolean areUsersConnected(
+            User userOne,
+            User userTwo) {
+
+        return connectionRepository
+                .findBySenderIdAndReceiverId(
+                        userOne.getId(),
+                        userTwo.getId())
+                .map(connection ->
+                        connection.getStatus()
+                                == ConnectionStatus.ACCEPTED)
+                .orElseGet(() ->
+                        connectionRepository
+                                .findBySenderIdAndReceiverId(
+                                        userTwo.getId(),
+                                        userOne.getId())
+                                .map(connection ->
+                                        connection.getStatus()
+                                                == ConnectionStatus.ACCEPTED)
+                                .orElse(false));
+    }
+
+    private MessageResponse mapToResponse(
+            Message message) {
 
         return MessageResponse.builder()
                 .id(message.getId())
-                .conversationId(message.getConversation().getId())
-                .senderId(message.getSender().getId())
-                .receiverId(message.getReceiver().getId())
+                .conversationId(
+                        message.getConversation().getId())
+                .senderId(
+                        message.getSender().getId())
+                .receiverId(
+                        message.getReceiver().getId())
                 .content(message.getContent())
                 .sentAt(message.getSentAt())
                 .build();
+    }
+
+    @Override
+    public List<MessageResponse> getMessagesByConversationId(
+            Long conversationId,
+            String email) {
+
+        Conversation conversation =
+                conversationRepository.findById(conversationId)
+                        .orElseThrow(() ->
+                                new ConversationNotFoundException(
+                                        "Conversation not found"));
+
+        boolean isParticipant =
+                conversation.getUserOne()
+                        .getEmail()
+                        .equals(email)
+                ||
+                conversation.getUserTwo()
+                        .getEmail()
+                        .equals(email);
+
+        if (!isParticipant) {
+            throw new ChatAccessDeniedException(
+                    "You are not a participant of this conversation");
+        }
+
+        return getMessages(conversation);
+    }
+
+    @Override
+    public Conversation getConversation(
+            User userOne,
+            User userTwo) {
+
+        return conversationRepository
+                .findByUserOneAndUserTwo(
+                        userOne,
+                        userTwo)
+                .or(() -> conversationRepository
+                        .findByUserTwoAndUserOne(
+                                userOne,
+                                userTwo))
+                .orElseThrow(() ->
+                        new ConversationNotFoundException(
+                                "Conversation not found"));
     }
 }

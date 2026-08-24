@@ -7,20 +7,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ConnectionRepository extends JpaRepository<Connection, Long> {
+public interface ConnectionRepository
+        extends JpaRepository<Connection, Long> {
 
     Optional<Connection> findBySenderIdAndReceiverId(
             Long senderId,
-            Long receiverId
-    );
+            Long receiverId);
 
     List<Connection> findByReceiverIdAndStatus(
             Long receiverId,
-            ConnectionStatus status
-    );
+            ConnectionStatus status);
 
     List<Connection> findBySenderIdAndStatus(
             Long senderId,
-            ConnectionStatus status
-    );
+            ConnectionStatus status);
 }

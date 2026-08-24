@@ -8,15 +8,28 @@ import java.util.List;
 
 public interface MessageService {
 
-    MessageResponse saveMessage(
-            Conversation conversation,
-            User sender,
-            User receiver,
-            String content);
+        MessageResponse saveMessage(
+                        Conversation conversation,
+                        User sender,
+                        User receiver,
+                        String content);
 
-    List<MessageResponse> getMessages(Conversation conversation);
+        List<MessageResponse> getMessages(
+                        Conversation conversation);
 
-    Conversation findOrCreateConversation(
-        User userOne,
-        User userTwo);
+        List<MessageResponse> getMessagesByConversationId(
+                        Long conversationId,
+                        String email);
+
+        Conversation findOrCreateConversation(
+                        User userOne,
+                        User userTwo);
+
+        boolean areUsersConnected(
+                        User userOne,
+                        User userTwo);
+
+        Conversation getConversation(
+                        User userOne,
+                        User userTwo);
 }
