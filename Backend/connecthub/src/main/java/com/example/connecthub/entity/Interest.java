@@ -3,7 +3,9 @@ package com.example.connecthub.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.util.List;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "interests")
@@ -26,5 +28,5 @@ public class Interest {
     private String description;
 
     @ManyToMany(mappedBy = "interests")
-    private List<User> users;
+    private Set<User> users = new HashSet<>();
 }

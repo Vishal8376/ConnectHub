@@ -6,6 +6,7 @@ import com.example.connecthub.dto.response.PostResponse;
 import com.example.connecthub.entity.Community;
 import com.example.connecthub.entity.Post;
 import com.example.connecthub.entity.User;
+import com.example.connecthub.exception.AccessDeniedException;
 import com.example.connecthub.exception.CommunityNotFoundException;
 import com.example.connecthub.exception.PostNotFoundException;
 import com.example.connecthub.repository.CommunityRepository;
@@ -95,7 +96,7 @@ public class PostServiceImpl implements PostService {
                         new PostNotFoundException("Post not found"));
 
         if (!post.getUser().getEmail().equals(email)) {
-            throw new RuntimeException(
+            throw new AccessDeniedException(
                     "Only the post author can update this post");
         }
 
@@ -118,7 +119,7 @@ public class PostServiceImpl implements PostService {
                         new PostNotFoundException("Post not found"));
 
         if (!post.getUser().getEmail().equals(email)) {
-            throw new RuntimeException(
+            throw new AccessDeniedException(
                     "Only the post author can delete this post");
         }
 

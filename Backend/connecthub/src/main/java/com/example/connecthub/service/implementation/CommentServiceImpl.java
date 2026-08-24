@@ -6,6 +6,7 @@ import com.example.connecthub.dto.response.CommentResponse;
 import com.example.connecthub.entity.Comment;
 import com.example.connecthub.entity.Post;
 import com.example.connecthub.entity.User;
+import com.example.connecthub.exception.AccessDeniedException;
 import com.example.connecthub.exception.CommentNotFoundException;
 import com.example.connecthub.exception.PostNotFoundException;
 import com.example.connecthub.repository.CommentRepository;
@@ -33,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
 
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                        new AccessDeniedException("User not found"));
 
         Post post = postRepository.findById(postId)
                 .orElseThrow(() ->
@@ -75,7 +76,7 @@ public class CommentServiceImpl implements CommentService {
                         new CommentNotFoundException("Comment not found"));
 
         if (!comment.getUser().getEmail().equals(email)) {
-            throw new RuntimeException(
+            throw new AccessDeniedException(
                     "Only the comment author can update this comment");
         }
 
@@ -96,7 +97,7 @@ public class CommentServiceImpl implements CommentService {
                         new CommentNotFoundException("Comment not found"));
 
         if (!comment.getUser().getEmail().equals(email)) {
-            throw new RuntimeException(
+            throw new AccessDeniedException(
                     "Only the comment author can delete this comment");
         }
 

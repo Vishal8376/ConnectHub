@@ -5,7 +5,10 @@ import com.example.connecthub.dto.request.UpdateCommunityRequest;
 import com.example.connecthub.dto.response.CommunityResponse;
 import com.example.connecthub.entity.Community;
 import com.example.connecthub.entity.User;
+import com.example.connecthub.enums.CommunityVisibility;
+import com.example.connecthub.exception.CommunityAccessDeniedException;
 import com.example.connecthub.exception.CommunityNotFoundException;
+import com.example.connecthub.exception.UserNotFoundException;
 import com.example.connecthub.repository.CommunityRepository;
 import com.example.connecthub.repository.UserRepository;
 import com.example.connecthub.service.CommunityService;
@@ -115,10 +118,17 @@ public class CommunityServiceImpl implements CommunityService {
                         String email) {
 
                 Community community = communityRepository.findById(id)
-                                .orElseThrow(() -> new CommunityNotFoundException("Community not found"));
+                                .orElseThrow(() -> new CommunityNotFoundException(
+                                                "Community not found"));
 
                 User user = userRepository.findByEmail(email)
-                                .orElseThrow(() -> new RuntimeException("User not found"));
+                                .orElseThrow(() -> new UserNotFoundException(
+                                                "User not found"));
+
+                if (community.getVisibility() == CommunityVisibility.PRIVATE) {
+                        throw new CommunityAccessDeniedException(
+                                        "Private communities cannot be joined directly");
+                }
 
                 community.getUsers().add(user);
                 user.getCommunities().add(community);
@@ -140,6 +150,11 @@ public class CommunityServiceImpl implements CommunityService {
 
                 community.getUsers().remove(user);
                 user.getCommunities().remove(community);
+
+                if (!community.getUsers().contains(user)) {
+                        throw new CommunityAccessDeniedException(
+                                        "You are not a member of this community");
+                }
 
                 communityRepository.save(community);
                 userRepository.save(user);

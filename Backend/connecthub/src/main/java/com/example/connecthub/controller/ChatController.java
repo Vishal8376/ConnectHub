@@ -8,6 +8,8 @@ import com.example.connecthub.exception.ChatAccessDeniedException;
 import com.example.connecthub.exception.UserNotFoundException;
 import com.example.connecthub.repository.UserRepository;
 import com.example.connecthub.service.MessageService;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -24,7 +26,7 @@ public class ChatController {
 
     @MessageMapping("/chat")
     public void sendMessage(
-            MessageRequest request,
+            @Valid MessageRequest request,
             StompHeaderAccessor accessor) {
 
         String senderEmail =

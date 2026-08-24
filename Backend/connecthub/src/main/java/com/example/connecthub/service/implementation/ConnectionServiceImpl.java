@@ -5,8 +5,10 @@ import com.example.connecthub.dto.response.ConnectionUserResponse;
 import com.example.connecthub.entity.Connection;
 import com.example.connecthub.entity.User;
 import com.example.connecthub.enums.ConnectionStatus;
+import com.example.connecthub.exception.AccessDeniedException;
 import com.example.connecthub.exception.ConnectionAlreadyExistsException;
 import com.example.connecthub.exception.ConnectionNotFoundException;
+import com.example.connecthub.exception.UserNotFoundException;
 import com.example.connecthub.repository.ConnectionRepository;
 import com.example.connecthub.repository.UserRepository;
 import com.example.connecthub.service.ConnectionService;
@@ -19,230 +21,245 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ConnectionServiceImpl implements ConnectionService {
 
-    private final ConnectionRepository connectionRepository;
-    private final UserRepository userRepository;
+        private final ConnectionRepository connectionRepository;
+        private final UserRepository userRepository;
 
-    @Override
-    public ConnectionResponse sendConnectionRequest(
-            String email,
-            Long receiverId) {
+        @Override
+        public ConnectionResponse sendConnectionRequest(
+                        String email,
+                        Long receiverId) {
 
-        User sender = getUser(email);
+                User sender = getUser(email);
 
-        User receiver = userRepository.findById(receiverId)
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"));
+                User receiver = userRepository.findById(receiverId)
+                                .orElseThrow(() -> new UserNotFoundException(
+                                                "User not found"));
 
-        if (sender.getId().equals(receiver.getId())) {
-            throw new ConnectionAlreadyExistsException(
-                    "You cannot connect with yourself");
+                // Prevent connecting with yourself
+                if (sender.getId().equals(receiver.getId())) {
+                        throw new ConnectionAlreadyExistsException(
+                                        "You cannot connect with yourself");
+                }
+
+                // Check if a connection already exists in either direction
+                Connection existingConnection = connectionRepository
+                                .findBySenderIdAndReceiverId(
+                                                sender.getId(),
+                                                receiver.getId())
+                                .orElseGet(() -> connectionRepository
+                                                .findBySenderIdAndReceiverId(
+                                                                receiver.getId(),
+                                                                sender.getId())
+                                                .orElse(null));
+
+                if (existingConnection != null) {
+
+                        // Pending request cannot be duplicated
+                        if (existingConnection.getStatus() == ConnectionStatus.PENDING) {
+
+                                throw new ConnectionAlreadyExistsException(
+                                                "Connection request is already pending");
+                        }
+
+                        // Accepted connection cannot be requested again
+                        if (existingConnection.getStatus() == ConnectionStatus.ACCEPTED) {
+
+                                throw new ConnectionAlreadyExistsException(
+                                                "Users are already connected");
+                        }
+
+                        // Rejected request → allow a new request
+                        if (existingConnection.getStatus() == ConnectionStatus.REJECTED) {
+
+                                connectionRepository.delete(existingConnection);
+                        }
+                }
+
+                // Create a new connection request
+                Connection connection = Connection.builder()
+                                .sender(sender)
+                                .receiver(receiver)
+                                .status(ConnectionStatus.PENDING)
+                                .build();
+
+                Connection savedConnection = connectionRepository.save(connection);
+
+                return mapToResponse(savedConnection);
         }
 
-        boolean existingConnection =
-                connectionRepository
-                        .findBySenderIdAndReceiverId(
-                                sender.getId(),
-                                receiver.getId())
-                        .isPresent()
-                ||
-                connectionRepository
-                        .findBySenderIdAndReceiverId(
-                                receiver.getId(),
-                                sender.getId())
-                        .isPresent();
+        @Override
+        public List<ConnectionUserResponse> getReceivedRequests(
+                        String email) {
 
-        if (existingConnection) {
-            throw new ConnectionAlreadyExistsException(
-                    "Connection already exists");
+                User user = getUser(email);
+
+                return connectionRepository
+                                .findByReceiverIdAndStatus(
+                                                user.getId(),
+                                                ConnectionStatus.PENDING)
+                                .stream()
+                                .map(connection -> mapToUserResponse(
+                                                connection,
+                                                connection.getSender()))
+                                .toList();
         }
 
-        Connection connection = Connection.builder()
-                .sender(sender)
-                .receiver(receiver)
-                .status(ConnectionStatus.PENDING)
-                .build();
+        @Override
+        public List<ConnectionUserResponse> getSentRequests(
+                        String email) {
 
-        Connection savedConnection =
-                connectionRepository.save(connection);
+                User user = getUser(email);
 
-        return mapToResponse(savedConnection);
-    }
-
-    @Override
-    public List<ConnectionUserResponse> getReceivedRequests(
-            String email) {
-
-        User user = getUser(email);
-
-        return connectionRepository
-                .findByReceiverIdAndStatus(
-                        user.getId(),
-                        ConnectionStatus.PENDING)
-                .stream()
-                .map(connection ->
-                        mapToUserResponse(
-                                connection,
-                                connection.getSender()))
-                .toList();
-    }
-
-    @Override
-    public List<ConnectionUserResponse> getSentRequests(
-            String email) {
-
-        User user = getUser(email);
-
-        return connectionRepository
-                .findBySenderIdAndStatus(
-                        user.getId(),
-                        ConnectionStatus.PENDING)
-                .stream()
-                .map(connection ->
-                        mapToUserResponse(
-                                connection,
-                                connection.getReceiver()))
-                .toList();
-    }
-
-    @Override
-    public List<ConnectionUserResponse> getConnections(
-            String email) {
-
-        User user = getUser(email);
-
-        List<ConnectionUserResponse> connections =
-                connectionRepository
-                        .findBySenderIdAndStatus(
-                                user.getId(),
-                                ConnectionStatus.ACCEPTED)
-                        .stream()
-                        .map(connection ->
-                                mapToUserResponse(
-                                        connection,
-                                        connection.getReceiver()))
-                        .toList();
-
-        connections.addAll(
-                connectionRepository
-                        .findByReceiverIdAndStatus(
-                                user.getId(),
-                                ConnectionStatus.ACCEPTED)
-                        .stream()
-                        .map(connection ->
-                                mapToUserResponse(
-                                        connection,
-                                        connection.getSender()))
-                        .toList()
-        );
-
-        return connections;
-    }
-
-    @Override
-    public ConnectionResponse acceptConnection(
-            Long connectionId,
-            String email) {
-
-        Connection connection = getConnection(connectionId);
-
-        if (!connection.getReceiver().getEmail().equals(email)) {
-            throw new RuntimeException(
-                    "Only the receiver can accept this request");
+                return connectionRepository
+                                .findBySenderIdAndStatus(
+                                                user.getId(),
+                                                ConnectionStatus.PENDING)
+                                .stream()
+                                .map(connection -> mapToUserResponse(
+                                                connection,
+                                                connection.getReceiver()))
+                                .toList();
         }
 
-        connection.setStatus(ConnectionStatus.ACCEPTED);
+        @Override
+        public List<ConnectionUserResponse> getConnections(
+                        String email) {
 
-        Connection updated =
-                connectionRepository.save(connection);
+                User user = getUser(email);
 
-        return mapToResponse(updated);
-    }
+                List<ConnectionUserResponse> connections = connectionRepository
+                                .findBySenderIdAndStatus(
+                                                user.getId(),
+                                                ConnectionStatus.ACCEPTED)
+                                .stream()
+                                .map(connection -> mapToUserResponse(
+                                                connection,
+                                                connection.getReceiver()))
+                                .toList();
 
-    @Override
-    public ConnectionResponse rejectConnection(
-            Long connectionId,
-            String email) {
+                connections.addAll(
+                                connectionRepository
+                                                .findByReceiverIdAndStatus(
+                                                                user.getId(),
+                                                                ConnectionStatus.ACCEPTED)
+                                                .stream()
+                                                .map(connection -> mapToUserResponse(
+                                                                connection,
+                                                                connection.getSender()))
+                                                .toList());
 
-        Connection connection = getConnection(connectionId);
-
-        if (!connection.getReceiver().getEmail().equals(email)) {
-            throw new RuntimeException(
-                    "Only the receiver can reject this request");
+                return connections;
         }
 
-        connection.setStatus(ConnectionStatus.REJECTED);
+        @Override
+        public ConnectionResponse acceptConnection(
+                        Long connectionId,
+                        String email) {
 
-        Connection updated =
-                connectionRepository.save(connection);
+                Connection connection = getConnection(connectionId);
 
-        return mapToResponse(updated);
-    }
+                if (!connection.getReceiver().getEmail().equals(email)) {
+                        throw new AccessDeniedException(
+                                        "Only the receiver can accept this request");
+                }
 
-    @Override
-    public void removeConnection(
-            Long connectionId,
-            String email) {
+                if (connection.getStatus() != ConnectionStatus.PENDING) {
+                        throw new ConnectionAlreadyExistsException(
+                                        "Connection request is no longer pending");
+                }
 
-        Connection connection = getConnection(connectionId);
+                connection.setStatus(ConnectionStatus.ACCEPTED);
 
-        boolean isSender =
-                connection.getSender().getEmail().equals(email);
+                Connection updated = connectionRepository.save(connection);
 
-        boolean isReceiver =
-                connection.getReceiver().getEmail().equals(email);
-
-        if (!isSender && !isReceiver) {
-            throw new RuntimeException(
-                    "You are not part of this connection");
+                return mapToResponse(updated);
         }
 
-        if (connection.getStatus() != ConnectionStatus.ACCEPTED) {
-            throw new RuntimeException(
-                    "Only accepted connections can be removed");
+        @Override
+        public ConnectionResponse rejectConnection(
+                        Long connectionId,
+                        String email) {
+
+                Connection connection = getConnection(connectionId);
+
+                if (!connection.getReceiver().getEmail().equals(email)) {
+                        throw new AccessDeniedException(
+                                        "Only the receiver can reject this request");
+                }
+
+                if (connection.getStatus() != ConnectionStatus.PENDING) {
+                        throw new ConnectionAlreadyExistsException(
+                                        "Connection request is no longer pending");
+                }
+
+                connection.setStatus(ConnectionStatus.REJECTED);
+
+                Connection updated = connectionRepository.save(connection);
+
+                return mapToResponse(updated);
         }
 
-        connectionRepository.delete(connection);
-    }
+        @Override
+        public void removeConnection(
+                        Long connectionId,
+                        String email) {
 
-    private User getUser(String email) {
+                Connection connection = getConnection(connectionId);
 
-        return userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new RuntimeException("User not found"));
-    }
+                boolean isSender = connection.getSender().getEmail().equals(email);
 
-    private Connection getConnection(Long id) {
+                boolean isReceiver = connection.getReceiver().getEmail().equals(email);
 
-        return connectionRepository.findById(id)
-                .orElseThrow(() ->
-                        new ConnectionNotFoundException(
-                                "Connection not found"));
-    }
+                if (!isSender && !isReceiver) {
+                        throw new AccessDeniedException(
+                                        "You are not part of this connection");
+                }
 
-    private ConnectionResponse mapToResponse(
-            Connection connection) {
+                if (connection.getStatus() != ConnectionStatus.ACCEPTED) {
+                        throw new AccessDeniedException(
+                                        "Only accepted connections can be removed");
+                }
 
-        return ConnectionResponse.builder()
-                .id(connection.getId())
-                .senderId(connection.getSender().getId())
-                .senderName(connection.getSender().getFullName())
-                .receiverId(connection.getReceiver().getId())
-                .receiverName(connection.getReceiver().getFullName())
-                .status(connection.getStatus())
-                .createdAt(connection.getCreatedAt())
-                .build();
-    }
+                connectionRepository.delete(connection);
+        }
 
-    private ConnectionUserResponse mapToUserResponse(
-            Connection connection,
-            User user) {
+        private User getUser(String email) {
 
-        return ConnectionUserResponse.builder()
-                .connectionId(connection.getId())
-                .userId(user.getId())
-                .fullName(user.getFullName())
-                .profilePicture(user.getProfilePicture())
-                .status(connection.getStatus())
-                .build();
-    }
+                return userRepository.findByEmail(email)
+                                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        }
+
+        private Connection getConnection(Long id) {
+
+                return connectionRepository.findById(id)
+                                .orElseThrow(() -> new ConnectionNotFoundException(
+                                                "Connection not found"));
+        }
+
+        private ConnectionResponse mapToResponse(
+                        Connection connection) {
+
+                return ConnectionResponse.builder()
+                                .id(connection.getId())
+                                .senderId(connection.getSender().getId())
+                                .senderName(connection.getSender().getFullName())
+                                .receiverId(connection.getReceiver().getId())
+                                .receiverName(connection.getReceiver().getFullName())
+                                .status(connection.getStatus())
+                                .createdAt(connection.getCreatedAt())
+                                .build();
+        }
+
+        private ConnectionUserResponse mapToUserResponse(
+                        Connection connection,
+                        User user) {
+
+                return ConnectionUserResponse.builder()
+                                .connectionId(connection.getId())
+                                .userId(user.getId())
+                                .fullName(user.getFullName())
+                                .profilePicture(user.getProfilePicture())
+                                .status(connection.getStatus())
+                                .build();
+        }
 }

@@ -33,34 +33,47 @@ public class WebSocketAuthInterceptor implements ChannelInterceptor {
             if (authorization == null ||
                     !authorization.startsWith("Bearer ")) {
 
-                return message;
+                throw new RuntimeException(
+                        "WebSocket authentication required");
             }
 
             String jwt = authorization.substring(7);
 
-            String email = jwtService.extractUsername(jwt);
+            try {
 
-            if (email != null) {
+                String email = jwtService.extractUsername(jwt);
+
+                if (email == null) {
+                    throw new RuntimeException(
+                            "Invalid WebSocket authentication");
+                }
 
                 UserDetails userDetails =
                         userDetailsService.loadUserByUsername(email);
 
-                if (jwtService.isTokenValid(jwt, userDetails)) {
-
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails,
-                                    null,
-                                    userDetails.getAuthorities()
-                            );
-
-                    accessor.setUser(authentication);
-
-                    accessor.getSessionAttributes().put(
-                            "userEmail",
-                            email
-                    );
+                if (!jwtService.isTokenValid(jwt, userDetails)) {
+                    throw new RuntimeException(
+                            "Invalid or expired WebSocket token");
                 }
+
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+
+                accessor.setUser(authentication);
+
+                accessor.getSessionAttributes().put(
+                        "userEmail",
+                        email
+                );
+
+            } catch (RuntimeException ex) {
+
+                throw new RuntimeException(
+                        "WebSocket authentication failed");
             }
         }
 

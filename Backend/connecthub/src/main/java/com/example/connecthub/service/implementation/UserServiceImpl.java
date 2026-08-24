@@ -9,6 +9,7 @@ import com.example.connecthub.entity.Interest;
 import com.example.connecthub.entity.User;
 import com.example.connecthub.enums.Role;
 import com.example.connecthub.exception.EmailAlreadyExistsException;
+import com.example.connecthub.exception.UserNotFoundException;
 import com.example.connecthub.repository.InterestRepository;
 import com.example.connecthub.repository.UserRepository;
 import com.example.connecthub.service.UserService;
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
     public UserProfileResponse getCurrentUserProfile(String email) {
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         return mapToUserProfileResponse(user);
     }
@@ -104,7 +105,7 @@ public class UserServiceImpl implements UserService {
             UpdateProfileRequest request) {
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         user.setFullName(request.getFullName());
         user.setBio(request.getBio());

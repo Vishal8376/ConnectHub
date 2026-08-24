@@ -12,8 +12,4 @@ public interface ConversationRepository
     Optional<Conversation> findByUserOneAndUserTwo(
             User userOne,
             User userTwo);
-
-    Optional<Conversation> findByUserTwoAndUserOne(
-            User userTwo,
-            User userOne);
 }
