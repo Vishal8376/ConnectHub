@@ -1,0 +1,616 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#fffbff",
+                "surface-tint": "#ab3425",
+                "on-tertiary-fixed": "#2a1700",
+                "surface-variant": "#dbe5dd",
+                "on-primary-container": "#fffbff",
+                "background": "#f2fcf3",
+                "on-secondary-container": "#3b6d4b",
+                "surface-bright": "#f2fcf3",
+                "primary-container": "#c94a38",
+                "on-surface": "#151d19",
+                "tertiary-fixed": "#ffddb8",
+                "primary": "#a83223",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-fixed-variant": "#653e00",
+                "secondary-container": "#b6edc2",
+                "tertiary": "#825100",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#b9efc5",
+                "on-primary": "#ffffff",
+                "surface-container-high": "#e1ebe2",
+                "outline": "#8c716c",
+                "surface-container-highest": "#dbe5dd",
+                "on-background": "#151d19",
+                "inverse-surface": "#29322d",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#00210e",
+                "tertiary-fixed-dim": "#fcba66",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#376847",
+                "surface-container": "#e6f0e8",
+                "inverse-primary": "#ffb4a8",
+                "tertiary-container": "#9f691d",
+                "surface-dim": "#d2ddd4",
+                "primary-fixed-dim": "#ffb4a8",
+                "primary-fixed": "#ffdad4",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#ecf6ee",
+                "on-surface-variant": "#58413d",
+                "outline-variant": "#e0bfba",
+                "inverse-on-surface": "#e9f3eb",
+                "on-secondary-fixed-variant": "#1e5031",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#8a1c10",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#9dd3aa",
+                "surface": "#f2fcf3",
+                "on-primary-fixed": "#410100"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "space-2xl": "3rem",
+                "content-max-layout": "76rem",
+                "space-xl": "2rem",
+                "space-3xl": "4rem",
+                "space-xxs": "0.25rem",
+                "content-max-feed": "42rem",
+                "space-sm": "0.75rem",
+                "space-lg": "1.5rem",
+                "space-md": "1rem",
+                "space-xs": "0.5rem",
+                "content-max-reading": "48rem",
+                "gutter-mobile": "1rem",
+                "gutter-desktop": "2rem"
+        },
+        "fontFamily": {
+                "body-sm": [
+                        "plusJakartaSans"
+                ],
+                "label-lg": [
+                        "plusJakartaSans"
+                ],
+                "headline-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "display-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "label-md": [
+                        "plusJakartaSans"
+                ],
+                "body-md": [
+                        "plusJakartaSans"
+                ],
+                "body-editorial": [
+                        "newsreader"
+                ],
+                "label-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-md": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg": [
+                        "plusJakartaSans"
+                ],
+                "display-lg": [
+                        "plusJakartaSans"
+                ],
+                "body-lg": [
+                        "plusJakartaSans"
+                ]
+        },
+        "fontSize": {
+                "body-sm": [
+                        "13px",
+                        {
+                                "lineHeight": "18px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-lg": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "26px",
+                        {
+                                "lineHeight": "34px",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "34px",
+                        {
+                                "lineHeight": "42px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "22px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-editorial": [
+                        "19px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "0.005em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.03em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-md": [
+                        "22px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "30px",
+                        {
+                                "lineHeight": "38px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "44px",
+                        {
+                                "lineHeight": "52px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-content-max-layout mx-auto px-gutter-mobile lg:px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg shrink-0"><a class="flex items-center gap-space-xs transition-opacity hover:opacity-90" data-path="home-feed" href="#"><img alt="ConnectHub Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UCGDlbFqKRn_56_Njyfdw7b7q_G8ZV7hOUd_TUrkXiGXTGaqDeGO3-A79i9H1nXc4eVCtIw7mNx9wx4hJ3jBD0EYp9o4tKFLquzZLuPGGMuoXHWeqEwB4FbmGoe0DHCd4KC_iVyHFajY8wGc7hQqMgw68DfpmnZFYYuJ_HqRhhcKRYWGoZQFGzu2DuvUz7WvbgHkiJNxJMDeY7wjiQ7RdPfnYq9AxVIFKGPobCuSyyzXkaSLh5EcLonSY"></a><div class="relative hidden xl:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span><input class="w-full pl-9 pr-4 py-1.5 rounded-xl bg-surface-container-low text-on-surface placeholder-on-surface-variant text-body-sm font-body-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all" placeholder="Search people, interests, communities..." type="text"></div></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="home-feed" href="#">Home Feed</a><a aria-current="page" class="transition-colors py-1 px-space-xs text-primary font-bold" data-path="discover-people" href="#">Discover People</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="my-network" href="#">My Network</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="communities" href="#">Communities</a><a class="relative font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="messages" href="#">Messages<span class="absolute top-1 right-0 w-2 h-2 rounded-full bg-primary"></span></a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xxs px-space-sm py-1.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-colors shadow-[0_2px_8px_rgba(168,50,35,0.2)]" type="button"><span class="material-symbols-outlined text-[18px]">edit_note</span><span class="">Share Post</span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="relative cursor-pointer group"><div class="p-0.5 rounded-full ring-2 ring-surface-container-low transition-all group-hover:ring-outline-variant"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_"></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-surface"></span></div></div></div></div></header><main class="w-full pt-16 pb-20 md:pb-12 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-content-max-layout mx-auto w-full px-gutter-mobile lg:px-gutter-desktop py-space-xl space-y-space-xl">
+<!-- Hero / Serendipitous Search Area -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-low p-space-lg lg:p-space-2xl shadow-sm">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-16 w-72 h-72 rounded-full bg-tertiary-fixed/30 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-content-max-feed mx-auto text-center space-y-space-md">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">spark</span>
+<span class="">Serendipitous Encounters</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Find people by rhythm, craft, and shared inquiry.
+        </h1>
+<p class="font-body-editorial text-body-editorial text-on-surface-variant max-w-xl mx-auto">
+          Not algorithmic matches. Genuine creative peers, material thinkers, and alumni moving within your quiet extended orbit.
+        </p>
+<!-- Conversational Search Bar -->
+<div class="pt-space-xs">
+<div class="relative flex items-center bg-surface-container-lowest rounded-xl shadow-md p-1.5 focus-within:ring-2 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined pl-space-sm text-on-surface-variant text-[22px]">explore</span>
+<input class="w-full bg-transparent px-space-sm py-space-xs font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none" id="discovery-search" placeholder="Search people by craft, shared alma mater, ongoing projects, or city..." type="text">
+<button class="shrink-0 px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-space-xxs hover:bg-primary-container transition-colors shadow-sm">
+<span class="">Explore</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Conversational Intent Chips -->
+<div class="flex flex-wrap items-center justify-center gap-space-xs pt-space-xs">
+<button class="filter-intent-btn px-space-sm py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm transition-all" data-filter="all">
+            All People
+          </button>
+<button class="filter-intent-btn px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" data-filter="interests">
+            Shared Interests
+          </button>
+<button class="filter-intent-btn px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" data-filter="communities">
+            Same Communities
+          </button>
+<button class="filter-intent-btn px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" data-filter="alumni">
+            Alumni
+          </button>
+<button class="filter-intent-btn px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-all" data-filter="collab">
+            Open to Collaborate
+          </button>
+</div>
+</div>
+</div>
+<!-- Discovery Overview Header & Discipline Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pt-space-xs">
+<div class="space-y-space-xxs">
+<div class="flex items-center gap-space-xs font-label-md text-label-md uppercase tracking-wider text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="">Extended Orbit</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface font-bold">
+          Discovering 84 thoughtful creators, architects, and researchers
+        </p>
+</div>
+<!-- Domain filter tags -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="domain-tag px-space-sm py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
+          Design &amp; Craft
+        </button>
+<button class="domain-tag px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
+          Urbanism
+        </button>
+<button class="domain-tag px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
+          Writers &amp; Researchers
+        </button>
+<button class="domain-tag px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
+          Tech &amp; Ethics
+        </button>
+</div>
+</div>
+<!-- 2-Column Discovery Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Person 1: Maya Lindqvist -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative group">
+<div class="space-y-space-md">
+<!-- Card Header with Avatar & Meta -->
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Editorial portrait of Maya, a ceramic artist in her bright Scandinavian pottery workshop in Copenhagen, natural soft morning light falling on earth-toned clay vases and linen apron, calm and tactile mood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw9LmNIMMO8nHZ4ds074u0Qbjhx7OVWpLjx4UiZmItiM81pN1iICzUz_yILhGN0S8_lo-coye1pQPsN7myL9rWSqVt7cIFindl6_EMG-92jd9C__uJ1kt8wcPGMkI6lGEhvRCsQo-eKcZQN_IQ6gDiG1f28KYK0fldCx4XU6CwAwBjAqzJDu1FfR2W756r1JIplg0R1gP_EascuNlAiVmuzHu9ag7Xbrj9pbnFnq6uOiCIDdy1JDF_">
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary" title="Active now"></span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">
+                  Maya Lindqvist
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Ceramic Sculptor &amp; Material Researcher
+                </p>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">Copenhagen</span>
+<span class="text-outline-variant">•</span>
+<span class="material-symbols-outlined text-[14px]">school</span>
+<span class="">Royal Danish Academy</span>
+</div>
+</div>
+</div>
+<!-- Proximity Pill -->
+<span class="shrink-0 px-space-xs py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">interests</span>
+<span class="">Common Ground</span>
+</span>
+</div>
+<!-- Bio Quote -->
+<blockquote class="font-body-editorial text-body-editorial text-on-surface bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            “Investigating regional Baltic clay beds and natural feldspar glazes. Seeking conversations around low-impact kiln firing techniques.”
+          </blockquote>
+<!-- Interests Tags -->
+<div class="space-y-space-xxs">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Focal Inquiries</div>
+<div class="flex flex-wrap gap-space-xxs">
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Stoneware</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Natural Glazes</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Studio Pedagogy</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Material Sourcing</span>
+</div>
+</div>
+</div>
+<!-- Mutual Affiliation & Relationship Action -->
+<div class="pt-space-lg mt-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container text-[14px]">diversity_2</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Both in <strong class="font-bold text-on-surface">Ceramic Arts Collective</strong>
+</span>
+</div>
+<!-- Connection State: Connect -->
+<button class="shrink-0 connect-action-btn px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-space-xxs hover:bg-primary-container shadow-sm transition-all" data-state="connect">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="">Connect</span>
+</button>
+</div>
+</div>
+<!-- Person 2: Julian Vance -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative group">
+<div class="space-y-space-md">
+<!-- Card Header with Avatar & Meta -->
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Intimate portrait of Julian, an independent book typographer and type historian seated in a sunlit London archive studio surrounded by handbound specimen catalogs and warm wood cabinets, warm editorial color palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABVZ6zWu8knPXbbnhPlkP7MYRtwmW3tr5W-dX0XCg5FqE8kBoOYlgGvE2WgQJr05IVNClxovHSLGDicvGGGCF_1Zohe8Hy-Om87ZDEllM1aXFUOSxM7NLGOTR2pjqh9ufhtCNw3msdZaNZn77i5nrOaKe_3-tpw-oYD-Jwn9xvnwv7oIeO1ba9gmorr0dRr93u9NP3-h797yZ7uNlaAOBVpZfR8cxGvb8yfdKjQOscHHEaQjg-BR3T">
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-tertiary-container" title="Away / In community"></span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">
+                  Julian Vance
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Independent Typographer &amp; Type Historian
+                </p>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">London</span>
+<span class="text-outline-variant">•</span>
+<span class="material-symbols-outlined text-[14px]">history_edu</span>
+<span class="">St. Bride Archive</span>
+</div>
+</div>
+</div>
+<!-- Proximity Pill -->
+<span class="shrink-0 px-space-xs py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">hub</span>
+<span class="">2nd Degree</span>
+</span>
+</div>
+<!-- Bio Quote -->
+<blockquote class="font-body-editorial text-body-editorial text-on-surface bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            “Cataloging Renaissance punchcutters while coding expressive variable fonts for digital print ephemera. Always keen to exchange specimen books.”
+          </blockquote>
+<!-- Interests Tags -->
+<div class="space-y-space-xxs">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Focal Inquiries</div>
+<div class="flex flex-wrap gap-space-xxs">
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Variable Fonts</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Editorial Design</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Bookbinding</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Letterpress</span>
+</div>
+</div>
+</div>
+<!-- Mutual Affiliation & Relationship Action -->
+<div class="pt-space-lg mt-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="flex -space-x-2 shrink-0">
+<span class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface shadow-xs">SM</span>
+<span class="w-6 h-6 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-[10px] font-bold text-on-secondary-fixed shadow-xs">LK</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+<strong class="font-bold text-on-surface">4 mutual connections</strong> in common
+            </span>
+</div>
+<!-- Connection State: Pending (Soft Ochre / Request Sent) -->
+<div class="shrink-0 px-space-md py-1.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-lg text-label-lg flex items-center gap-space-xxs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="">Request Sent</span>
+</div>
+</div>
+</div>
+<!-- Person 3: Amara Okafor -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative group">
+<div class="space-y-space-md">
+<!-- Card Header with Avatar & Meta -->
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Editorial candid photography of Amara, an environmental biomimicry researcher sitting with mycelium samples and field notebooks in a bright Pacific Northwest lab space, soft green foliage and gentle warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwR_XVZgP6tJPsRPDONFDOKln9xc-eJcF-OwTdj8bA-Xn0TbFqO6KZd7W-gKwKhKFX9zN6YjNa0j-XMxAM4QsbVoOAKejer1tX5DJ96n0o0cZ95az5FVpdTGcVTLyf1cpFwE3lH-oOxjcx0hnUfrkdrFlBk44-XxAHjsTDfJr7lRsvJulM5dzSiSAU16MJgLDMwVCrwzypF8-vwfynS4hFAcXg0C4jfhv-KeHCzqhVRAKU6CKNrF7g">
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary" title="Active now"></span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">
+                  Amara Okafor
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Biomimicry Researcher &amp; Product Lead
+                </p>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">Seattle</span>
+<span class="text-outline-variant">•</span>
+<span class="material-symbols-outlined text-[14px]">eco</span>
+<span class="">BioDesign Guild</span>
+</div>
+</div>
+</div>
+<!-- Proximity Pill -->
+<span class="shrink-0 px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">handshake</span>
+<span class="">Open to Collab</span>
+</span>
+</div>
+<!-- Bio Quote -->
+<blockquote class="font-body-editorial text-body-editorial text-on-surface bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            “Translating fungal mycelium structural integrity into compostable shipping solutions. Open to connecting with industrial designers and packaging engineers.”
+          </blockquote>
+<!-- Interests Tags -->
+<div class="space-y-space-xxs">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Focal Inquiries</div>
+<div class="flex flex-wrap gap-space-xxs">
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Circular Economy</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Regenerative Materials</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Bio-Fabrication</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Life Cycle Design</span>
+</div>
+</div>
+</div>
+<!-- Mutual Affiliation & Relationship Action -->
+<div class="pt-space-lg mt-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container text-[14px]">forest</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Co-organizes <strong class="font-bold text-on-surface">Pacific Northwest Biomaterials Circle</strong>
+</span>
+</div>
+<!-- Connection State: Connect -->
+<button class="shrink-0 connect-action-btn px-space-md py-1.5 rounded-lg bg-primary text-on-primary font-label-lg text-label-lg flex items-center gap-space-xxs hover:bg-primary-container shadow-sm transition-all" data-state="connect">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="">Connect</span>
+</button>
+</div>
+</div>
+<!-- Person 4: Kenji Takahashi -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative group">
+<div class="space-y-space-md">
+<!-- Card Header with Avatar & Meta -->
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="relative shrink-0">
+<img class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="Editorial portrait of Kenji, Japanese master timber architect and joinery craftsman holding a chiseling tool, standing in a traditional cedar wood pavilion with filtered sunlight casting linear shadows, calm warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiVC2-_bQSqJ8Me1wUu4u4RcpeGBXjKLcTV6XXyHOjd-BxQ2R6MSwjUIg4tTPscbw1L7q6YvPQWeI4EJ0PLUeXHYmaRSyBWCSXT3Un3jSIPZoVm7EEitPJhL0NgsOdsfnBODDkqLMle7pHWZex7tBI1GcblT5WpKn-5r0q4mYjYCuiIDQEviFLkxdMF596D5ALDmlypdh_EktBV088peUvBq2pqZzNn0KoFHLwcODQZgeFagbgTmar">
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary" title="Active now"></span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold group-hover:text-primary transition-colors">
+                  Kenji Takahashi
+                </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Architect &amp; Wood Craftsperson
+                </p>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">Kyoto &amp; San Francisco</span>
+<span class="text-outline-variant">•</span>
+<span class="material-symbols-outlined text-[14px]">architecture</span>
+<span class="">Atelier Kigumi</span>
+</div>
+</div>
+</div>
+<!-- Proximity Pill -->
+<span class="shrink-0 px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span class="">1st Degree Connection</span>
+</span>
+</div>
+<!-- Bio Quote -->
+<blockquote class="font-body-editorial text-body-editorial text-on-surface bg-surface-container-lowest p-space-md rounded-lg shadow-sm">
+            “Synthesizing traditional Sukiya timber joinery with seismic parametric timber structures. Currently running workshops between Kansai and Northern California.”
+          </blockquote>
+<!-- Interests Tags -->
+<div class="space-y-space-xxs">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Focal Inquiries</div>
+<div class="flex flex-wrap gap-space-xxs">
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Kigumi Joinery</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Mass Timber</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Urban Wood Reuse</span>
+<span class="px-space-xs py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm">Vernacular Space</span>
+</div>
+</div>
+</div>
+<!-- Mutual Affiliation & Relationship Action -->
+<div class="pt-space-lg mt-space-md flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">
+              Connected since <strong class="font-bold text-on-surface">September 2024</strong>
+</span>
+</div>
+<!-- Connection State: Connected + Secondary Message Button -->
+<div class="flex items-center gap-space-xs shrink-0">
+<span class="px-space-sm py-1.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-lg text-label-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Connected</span>
+</span>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-highest text-on-surface hover:bg-surface-container-high font-label-lg text-label-lg flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+<span class="">Message</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Serendipitous Salon Banner -->
+<div class="bg-surface-container rounded-xl p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-lg shadow-sm">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary text-[26px]">coffee</span>
+</div>
+<div class="space-y-space-xxs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+            Looking for an unhurried 1-on-1 intellectual exchange?
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">
+            Signal your current research curiosity to people whose work overlaps with yours. You will be introduced softly over weekly quiet dispatches.
+          </p>
+</div>
+</div>
+<button class="shrink-0 px-space-md py-2 rounded-xl bg-secondary text-on-secondary hover:bg-secondary/90 font-label-lg text-label-lg shadow-sm transition-all flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">radio_button_checked</span>
+<span class="">Broadcast an Inquiry</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple interactive micro-actions for filter chips and connection buttons
+  document.querySelectorAll('.filter-intent-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-intent-btn').forEach(b => {
+        b.classList.remove('bg-primary', 'text-on-primary');
+        b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      });
+      btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      btn.classList.add('bg-primary', 'text-on-primary');
+    });
+  });
+
+  document.querySelectorAll('.domain-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      tag.classList.toggle('bg-secondary-container');
+      tag.classList.toggle('text-on-secondary-container');
+    });
+  });
+
+  document.querySelectorAll('.connect-action-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.remove('bg-primary', 'text-on-primary', 'hover:bg-primary-container');
+      btn.classList.add('bg-tertiary-fixed', 'text-on-tertiary-fixed-variant');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">schedule</span><span>Request Sent</span>';
+      btn.disabled = true;
+    });
+  });
+</script></main><nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md shadow-[0_-2px_12px_rgba(0,0,0,0.05)] px-space-md py-space-xs flex items-center justify-around" data-active-classes="text-primary font-bold"><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="home-feed" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="">Feed</span></a><a aria-current="page" class="flex flex-col items-center gap-0.5 text-primary font-bold" data-path="discover-people" href="#"><span class="material-symbols-outlined text-[20px]">person_search</span><span class="">Discover</span></a><a class="flex flex-col items-center justify-center -mt-4 w-10 h-10 rounded-full bg-primary text-on-primary shadow-[0_4px_12px_rgba(168,50,35,0.3)]" data-path="share-modal" href="#"><span class="material-symbols-outlined text-[22px]">add</span></a><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="communities" href="#"><span class="material-symbols-outlined text-[20px]">groups</span><span class="">Groups</span></a><a class="relative flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="messages" href="#"><span class="material-symbols-outlined text-[20px]">chat_bubble</span><span class="absolute top-0 right-2 w-2 h-2 rounded-full bg-primary"></span><span class="">Chats</span></a></nav><footer class="hidden md:block w-full bg-surface-container-low py-space-xl"><div class="max-w-content-max-layout mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="">© 2025 ConnectHub Inc. Thoughtful connections and mindful communities.</div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">Privacy &amp; Data</a><a class="hover:text-on-surface transition-colors" href="#">Terms</a><a class="hover:text-on-surface transition-colors" href="#">Support</a></div></div></footer>
+
+</body></html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#fffbff",
+                "surface-tint": "#ab3425",
+                "on-tertiary-fixed": "#2a1700",
+                "surface-variant": "#dbe5dd",
+                "on-primary-container": "#fffbff",
+                "background": "#f2fcf3",
+                "on-secondary-container": "#3b6d4b",
+                "surface-bright": "#f2fcf3",
+                "primary-container": "#c94a38",
+                "on-surface": "#151d19",
+                "tertiary-fixed": "#ffddb8",
+                "primary": "#a83223",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-fixed-variant": "#653e00",
+                "secondary-container": "#b6edc2",
+                "tertiary": "#825100",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#b9efc5",
+                "on-primary": "#ffffff",
+                "surface-container-high": "#e1ebe2",
+                "outline": "#8c716c",
+                "surface-container-highest": "#dbe5dd",
+                "on-background": "#151d19",
+                "inverse-surface": "#29322d",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#00210e",
+                "tertiary-fixed-dim": "#fcba66",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#376847",
+                "surface-container": "#e6f0e8",
+                "inverse-primary": "#ffb4a8",
+                "tertiary-container": "#9f691d",
+                "surface-dim": "#d2ddd4",
+                "primary-fixed-dim": "#ffb4a8",
+                "primary-fixed": "#ffdad4",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#ecf6ee",
+                "on-surface-variant": "#58413d",
+                "outline-variant": "#e0bfba",
+                "inverse-on-surface": "#e9f3eb",
+                "on-secondary-fixed-variant": "#1e5031",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#8a1c10",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#9dd3aa",
+                "surface": "#f2fcf3",
+                "on-primary-fixed": "#410100"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "space-2xl": "3rem",
+                "content-max-layout": "76rem",
+                "space-xl": "2rem",
+                "space-3xl": "4rem",
+                "space-xxs": "0.25rem",
+                "content-max-feed": "42rem",
+                "space-sm": "0.75rem",
+                "space-lg": "1.5rem",
+                "space-md": "1rem",
+                "space-xs": "0.5rem",
+                "content-max-reading": "48rem",
+                "gutter-mobile": "1rem",
+                "gutter-desktop": "2rem"
+        },
+        "fontFamily": {
+                "body-sm": [
+                        "plusJakartaSans"
+                ],
+                "label-lg": [
+                        "plusJakartaSans"
+                ],
+                "headline-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "display-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "label-md": [
+                        "plusJakartaSans"
+                ],
+                "body-md": [
+                        "plusJakartaSans"
+                ],
+                "body-editorial": [
+                        "newsreader"
+                ],
+                "label-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-md": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg": [
+                        "plusJakartaSans"
+                ],
+                "display-lg": [
+                        "plusJakartaSans"
+                ],
+                "body-lg": [
+                        "plusJakartaSans"
+                ]
+        },
+        "fontSize": {
+                "body-sm": [
+                        "13px",
+                        {
+                                "lineHeight": "18px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-lg": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "26px",
+                        {
+                                "lineHeight": "34px",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "34px",
+                        {
+                                "lineHeight": "42px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "22px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-editorial": [
+                        "19px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "0.005em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.03em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-md": [
+                        "22px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "30px",
+                        {
+                                "lineHeight": "38px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "44px",
+                        {
+                                "lineHeight": "52px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-content-max-layout mx-auto px-gutter-mobile lg:px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg shrink-0"><a class="flex items-center gap-space-xs transition-opacity hover:opacity-90" data-path="home-feed" href="#"><img alt="ConnectHub Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UCGDlbFqKRn_56_Njyfdw7b7q_G8ZV7hOUd_TUrkXiGXTGaqDeGO3-A79i9H1nXc4eVCtIw7mNx9wx4hJ3jBD0EYp9o4tKFLquzZLuPGGMuoXHWeqEwB4FbmGoe0DHCd4KC_iVyHFajY8wGc7hQqMgw68DfpmnZFYYuJ_HqRhhcKRYWGoZQFGzu2DuvUz7WvbgHkiJNxJMDeY7wjiQ7RdPfnYq9AxVIFKGPobCuSyyzXkaSLh5EcLonSY"></a><div class="relative hidden xl:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span><input class="w-full pl-9 pr-4 py-1.5 rounded-xl bg-surface-container-low text-on-surface placeholder-on-surface-variant text-body-sm font-body-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all" placeholder="Search people, interests, communities..." type="text"></div></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors py-1 px-space-xs text-primary font-bold" data-path="home-feed" href="#">Home Feed</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="discover-people" href="#">Discover People</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="my-network" href="#">My Network</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="communities" href="#">Communities</a><a class="relative font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="messages" href="#">Messages<span class="absolute top-1 right-0 w-2 h-2 rounded-full bg-primary"></span></a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xxs px-space-sm py-1.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-colors shadow-[0_2px_8px_rgba(168,50,35,0.2)]" type="button"><span class="material-symbols-outlined text-[18px]">edit_note</span><span class="">Share Post</span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="relative cursor-pointer group"><div class="p-0.5 rounded-full ring-2 ring-surface-container-low transition-all group-hover:ring-outline-variant"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_"></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-surface"></span></div></div></div></div></header><main class="w-full pt-16 pb-20 md:pb-12 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle studio banner ambient background -->
+<div class="relative w-full overflow-hidden bg-surface-container-low">
+<div class="w-full h-72 sm:h-84 md:h-96 bg-cover bg-center opacity-85" data-alt="Sunlit architectural atelier workbench seen from above, filled with clay prototypes, Japanese joinery samples, textured linen swatches, terracotta ceramic vessel fragments, and soft charcoal interaction sketches. Warm morning ambient light with warm earth tones, soft shadows, editorial craft aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNSx1vfGiW3qZKd8zie85SWdyrVNJxth5kch0n7gAIeF3Kg0HKsLozTTpAjQbO1Zr3rJ7vwRueMVz9DRzIKQwdFI5jbGHz_PSxLzZd6_NXWxsBtIYcLMqtR8m-Xf5vyQ8tu8NWe8qDfpsxfsy5PGB5CBr1OsgT3miOMUpwLh-zqDv-BZ8y9_5r3bQJ21T4VSL3_zdqwOKsannh4Sw9ZXEEVHbPIa8JmELTEwG5ZkO3qTWLbdHlukha')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/40 to-transparent"></div>
+<div class="absolute top-6 right-6 hidden md:flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-surface/80 backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">In the Studio • Berkeley, CA</span>
+</div>
+</div>
+<!-- Profile Identity & Floating Meta Section -->
+<div class="max-w-content-max-layout mx-auto w-full px-gutter-mobile lg:px-gutter-desktop">
+<div class="relative -mt-20 sm:-mt-24 md:-mt-28 flex flex-col md:flex-row md:items-end justify-between gap-space-lg pb-space-lg">
+<!-- Avatar & Core Info -->
+<div class="flex flex-col sm:flex-row items-start sm:items-end gap-space-md">
+<div class="relative group shrink-0">
+<div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full overflow-hidden shadow-xl bg-surface-container-lowest p-1.5">
+<img class="w-full h-full object-cover rounded-full" data-alt="Cinematic natural portrait of Dr. Aris Thorne, a thoughtful 38-year-old cognitive ergonomics researcher with warm gentle eyes, subtle wireframe spectacles, and textured linen overshirt. Natural warm sunlit domestic lighting, quiet confidence, authentic smile, editorial portrait photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYSj9SPBQ6lzV0sarufFS36xt9Of3qcTOjibEHFUqM27O5g5bogaxYlVDs5g5xFm0qu6vB_LFW2z3fSGlWDaHJ9L6cV3lwxnIeHe_7rdGy2nYovhKb1CQkDUK6xTBszFQqZNR82jKod9Zs3EjWRTnyAb05W0YjzHlRi9Mx_yLfMY31iZhtE4XM9gumpHqfUcPYhEBi3miFx1t7KTs5gbGlpzU38S65AgbRMqUc9ZzxRjMK9P5kx1qi">
+</div>
+<div class="absolute bottom-2 right-2 w-5 h-5 rounded-full bg-secondary shadow-md flex items-center justify-center" title="Active now">
+<span class="material-symbols-outlined text-[12px] text-on-secondary" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<div class="flex flex-col space-y-1">
+<div class="flex items-center flex-wrap gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Dr. Aris Thorne</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="">Researcher &amp; Maker</span>
+</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+            Cognitive Ergonomist &amp; Spatial Interaction Researcher at <span class="text-on-surface font-medium">UC Berkeley Cognitive Science Lab</span>. Investigating tactile affordances in ambient physical-digital environments.
+          </p>
+<div class="flex items-center flex-wrap gap-y-1 gap-x-space-md pt-1 text-on-surface-variant font-label-md text-label-md">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+              Berkeley, California
+            </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">hub</span>
+              Tangible Computing • Civic Design
+            </span>
+</div>
+</div>
+</div>
+<!-- Mutual Connection Footprint (Elena's view) -->
+<div class="flex flex-col items-start md:items-end gap-1 shrink-0 bg-surface-container-low px-4 py-2.5 rounded-2xl shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium uppercase tracking-wider">Social Proximity</span>
+<div class="flex items-center gap-space-xs">
+<div class="flex -space-x-2 overflow-hidden py-0.5">
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface object-cover" data-alt="Small circular avatar of Elena Rostova, warm profile photo with dark tied back hair and linen shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgx49_rykRuscrFht_P6dsLG_MJG201pD6KvRHZJkDNM0thb7xg1gAKjYbXE4iOLIbKSWuqQNr5FgtnbAHYUpjqkwgfUoKHHEwtc3swNYus9yISi2Vile3tmli0uGxZy9zVmEEj-cVGBpOV08qzBgkUcPWO4f4Xl0747oHx4L3G86rk_Bbn_UBSaXkOeCUDFcgjjI9ChpUOtgTAO8CW2l33JHMQ6GuBgO75Shbg25AT5DBVNocN5SO">
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface object-cover" data-alt="Small circular avatar of an academic colleague with glasses smiling warmly" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPtBwZa-CYbPTmpqtIuYoQmbUwlzPQSTvXKsvWFbpZ8uy2udum7YDsCQFvJZd5vFbYUbrkjN2NGkCeUivBKAqjxkVQ7tKt86uY9-P5zRlOQGrM-0IZCSZOkE2Xqii9NmYw2pQ4089AXreFKfgydjXxjSHIsoeo6k6PMKB_jH65VMWTo-jFUu1c4HuTSpc1dia5rpxm3KTj6weMgny4xRLLgyZuC6uB0bVTL6sPMrPrdQYgr-h_gHXt">
+<img class="inline-block h-6 w-6 rounded-full ring-2 ring-surface object-cover" data-alt="Small circular avatar of a ceramic designer in an art workshop smiling gently" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqdBIO5hOCgdAwUwctlFLp06pyuky2ot4B4NKJxJPaVRztZESfK2CjuW6MaWF2yGNitVh4QRnwKKa-mPTNr1hYqTltkpF99gi8VRHi-QhcfwYAwxO9eRCF18SgxPcEIyzReKo0_cjHYfb5qtK2eQQJru_qgfBLxnIbnjxPghc-2EumZxp1JBvS0l3g7w0eByAYv47JS1C_GpaMNvTy_eGpueLsqoXE5TQgQv0KtfQI0ns5zlxfaGru">
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Elena and 14 others in common</span>
+</div>
+</div>
+</div>
+<!-- PENDING INVITATION CALLOUT TRAY (Contextual Relationship State Machine) -->
+<div class="w-full mb-space-xl p-space-md sm:p-space-lg rounded-2xl bg-surface-container transition-all duration-300 shadow-sm" id="connectionTray">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<!-- Note Bubble & Intent -->
+<div class="flex items-start gap-space-sm max-w-2xl">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
+</div>
+<div class="flex flex-col space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Connection Request Received</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 days ago</span>
+</div>
+<p class="font-body-editorial text-body-editorial italic text-on-surface-variant">
+              “Hi Elena, really loved your studio reflections on tactile interfaces. Would love to stay in touch and exchange notes on spatial craft!”
+            </p>
+</div>
+</div>
+<!-- Action Button Matrix -->
+<div class="flex items-center gap-space-xs self-stretch sm:self-auto shrink-0 pt-2 lg:pt-0">
+<button class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-space-xxs px-space-md py-2.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container active:scale-95 transition-all shadow-md" id="acceptBtn" onclick="handleAccept()">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+<span class="">Accept Connection</span>
+</button>
+<button class="inline-flex items-center justify-center px-space-md py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-container-highest active:scale-95 transition-all" id="declineBtn" onclick="handleDecline()">
+<span class="">Decline</span>
+</button>
+<button class="inline-flex items-center justify-center p-2.5 rounded-xl bg-surface-container-high text-on-surface hover:bg-surface-container-highest active:scale-95 transition-all" title="Send Quick Response Note">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Relationship Accepted Alert Toast (hidden initially) -->
+<div class="hidden w-full mb-space-xl p-space-md rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-between shadow-sm animate-fade" id="acceptedToast">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[24px]">favorite</span>
+<span class="font-body-md text-body-md font-medium">You and Dr. Aris Thorne are now connected. You share 2 active community circles.</span>
+</div>
+<button class="px-space-sm py-1 rounded-lg bg-surface text-secondary font-label-sm text-label-sm shadow-sm hover:bg-surface-container-low transition-colors">
+        Say Hello
+      </button>
+</div>
+<!-- Navigation Tabs / Section Selectors -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs mb-space-xl border-b border-transparent">
+<button class="flex items-center gap-2 px-space-md py-2 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg shadow-sm">
+<span class="material-symbols-outlined text-[18px]">article</span>
+<span class="">Conversations &amp; Posts</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary-container text-[11px] font-bold">42</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+<span class="">Communities</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-[11px]">6</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span class="">Inquiries &amp; Thoughts</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-lg text-label-lg transition-all">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span class="">About &amp; Background</span>
+</button>
+</div>
+<!-- Main Profile Content Grid (Asymmetric Bespoke 2-Column) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start pb-space-3xl">
+<!-- LEFT SUBPANEL: Presence, Living Philosophy & Shared Affinity (4 columns) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Personal Manifesto Card -->
+<div class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 text-surface-container-highest/60 select-none pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">format_quote</span>
+</div>
+<div class="relative z-10 flex flex-col space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Core Working Thesis</span>
+<p class="font-body-editorial text-body-editorial text-on-surface italic leading-relaxed pt-1">
+              “Design exists at the boundary of fingertips and thought. If an interface fails to acknowledge our weight, breath, and spatial memory, it starves our humanity.”
+            </p>
+<div class="pt-space-xs flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">psychology</span>
+<span class="">Lab Journal • Vol. IX</span>
+</div>
+</div>
+</div>
+<!-- Focused Research Inquiries -->
+<div class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Focused Inquiries</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active 2025</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-sm rounded-xl bg-surface-container flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-tint/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">touch_app</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Tactile Feedback Micro-Textures</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Exploring ceramics and abrasive haptic surfaces in ambient controllers.</span>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary/15 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">crop_free</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Human-Centered Spatiality</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Room-scale interaction cues without display fatigue or head-mounted gear.</span>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">Neuro-Aesthetics of Slowness</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Calm pacing in synchronous community discourse tools.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Shared Circles (Elena & Aris Common Communities) -->
+<div class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">diversity_1</span>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Shared Circles</h2>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">2 in common</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Atmospheric photo of handmade stoneware bowls stacked on wood shelf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVgFag8jkh93UOm3UcyGH18Jfhd348schT1NJIyggEMirOoUBgvbB_m-QQ2OONQ-ft8bLpS7jIGzFNvQ6sLd63WaGAn2kCjmjspbzur84bxfNiYpJTJB6U3bbBRtIy5qltxmdcvqxLQx72MvDfAiyhmD75OfocW86i15fUjOnd1Us-aDCTTdI_TDn6_5i4igpZM1ghQc3pFkoK4O3MBqgbou9SVgcVF1D08ob9_DpoylanQQRCU59i">
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Ceramic Arts Collective</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">840 makers • Weekly kiln notes</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[20px] transition-colors">chevron_right</span>
+</div>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer group">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Architectural city planning model with wooden blocks and green parks diagram" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxEt8t-Inzj0tlHLyRp91lsbJotDXe1LaRSgLi5QUaRh8P_Su7wtUR8QXibYicestm61KvALh_2K1dmVUU37q7AeClJ3oBoxH44CRCrX8xrzplCdfl6S-ngeRQz6SU0D90p5ozmgw-YM56zHDolkL0jJJ709PrBYxOPV07x3vg2rOLUIuBlb5nyD_FJl4F9KuHvHzPQa2NANiNJC85cBjBZtMHVBEd9Yvy1EabeAUriGrG372E9PZh">
+</div>
+<div>
+<div class="font-label-lg text-label-lg font-semibold text-on-surface group-hover:text-primary transition-colors">Civic Design Lab</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">2.4k urbanists • Bi-weekly salon</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary text-[20px] transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sensory Space / Soundscape & Reading Stack -->
+<div class="p-space-md rounded-2xl bg-surface-container-low shadow-sm flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/30 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">menu_book</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-medium">Currently Reading</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">The Eyes of the Skin: Architecture and the Senses</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Juhani Pallasmaa</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Thoughtful Chronology & Conversational Artifacts (8 columns) -->
+<div class="lg:col-span-8 flex flex-col gap-space-xl">
+<!-- POST 1: Deep Reflective Story with Workbench Photography -->
+<article class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-space-md">
+<!-- Post Author Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Close up face of Dr. Aris Thorne smiling with wireframe glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5vWrLbI_4R3RZkbH9_ssHZ0kM17pa7tQmy0sXkYQJC5Yh44VgqFfgpLZSymjSHJvxULLaAUGLBxtOdDMnlRJAm1KUE3ip81GXkX31CBjRzWBCYt0U7EP-OUYGrzq1snlU9urt4DYl2OzHgfp0F4SIDuGIyMWTf_cL8B9NirCfm6tOQ05HmcJmDfX6Qyr0JFTJc2xZ247ddpJ9iSt4E1omnxm3Z_u55R198qgC-_HQDHqKO5fGUBJ9">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dr. Aris Thorne</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 4 days ago</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Published in Tangible Computing Guild</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<!-- Post Core Narrative -->
+<div class="flex flex-col space-y-space-sm">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface leading-snug">
+              Why glass flat-panels make us forget: Lessons from 14 days of ceramic haptic prototypes.
+            </h3>
+<p class="font-body-editorial text-body-editorial text-on-surface-variant leading-relaxed">
+              When our hands touch raw grogged clay versus glazed feldspar, our mechanoreceptors fire in distinct temporal bursts. Over the last fortnight in the studio, we measured electrical skin response while participants navigated complex spatial timelines. The takeaway was startling: tactile grain density created twice the recall permanence compared to smooth capacitive haptics.
+            </p>
+<p class="font-body-editorial text-body-editorial text-on-surface-variant leading-relaxed">
+              Here is the tactile test rig assembled this afternoon—slip-cast modular sliders with variable abrasive resistance:
+            </p>
+</div>
+<!-- Visual Artifact Workbench Photography -->
+<div class="rounded-xl overflow-hidden shadow-sm bg-surface-container">
+<img class="w-full h-80 sm:h-96 object-cover" data-alt="Overhead close-up photography of hand-turned ceramic interface sliders on an aged oak workbench, tactile clay dials, electronic breadboards with braided copper wires, and handwritten observation notes on heavy warm paper stock. Soft focused studio depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpiaOBY_bP11oz851xqV4bNcF1ST5A7iJAxXMaHXqplt8ABzfHoswIACAm08UP0D4xWamrl6XbHLl1U4g_Q3fXWT3ch7jKFP3TXeuUi8CshYOiOCVPQHxRo-1yQtNAGrFOHSJfNZdjPzVK_Xy6V8fN18F3anIdhV2RyYvNadUv-QkUuxvoJo68TjfCPHzZncpy_qdNY-6ns4WSi79Xszyyskp1Q5drwLkM1k_GA2ktU0Y89qPljBD">
+<div class="p-3 bg-surface-container-high/60 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="italic">Bench Series 04: Porous stoneware thumb-rotaries with passive magnetic detents.</span>
+<span class="font-medium">Berkeley Lab</span>
+</div>
+</div>
+<!-- Meaningful Interaction Bar (Zero vanity metric clutter) -->
+<div class="pt-space-xs flex items-center justify-between border-t border-surface-container">
+<div class="flex items-center gap-space-md">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px]">spa</span>
+<span class="">142 Reflections</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px]">forum</span>
+<span class="">18 Peer Notes</span>
+</button>
+</div>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">bookmark_border</span>
+<span class="hidden sm:inline">Save Thought</span>
+</button>
+</div>
+<!-- Highlighted Nested Peer Dialogue Sample -->
+<div class="mt-2 p-space-md rounded-xl bg-surface-container flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Portrait of Professor Marcus Chen, smiling warmly with salt and pepper beard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZE-j1ht23ehUTl5gVibsK1uVYFJ9ywnchCz3D1jlh8WrDcm0ghdl4Y-K6iDrAXK_oY3ZnLr-OkhTvt9Y-K8-hV6TRwyDRF4MhpILeIiMcu_iEP1jtcmgWJl_oM_HZKeohjQ-EqCyD33fONfK60dnT253WDaf9nKf3uNyaX2ZqCI0jop1A7V8LRVSQ5j2Nx5HFhNvriKUKmDCZjDrkWY7lNONf2FANpFWlbwHn-PeKbVmRktITtqZN">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Prof. Marcus Chen</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 days ago</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Lab Collaborator</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant pl-8">
+              “This echoes Gibson’s ecological perception thesis directly. When you introduce friction, users slow down their saccades, allowing the prefrontal cortex to breathe.”
+            </p>
+</div>
+</article>
+<!-- POST 2: Community Inquiry in Civic Design Lab -->
+<article class="p-space-lg rounded-2xl bg-surface-container-low shadow-sm flex flex-col space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Dr. Aris Thorne in outdoor daylight smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnR1U2KR2Q4Mla8IYjxynDHwl8S9clOVEERHzfLRh2kGqVtnYBQoE9tmsKiSqB9Gn1qtjT_kAuPiM2sh2D_WqLWPaZcX3DRViYGOyoFe79JFLkWKVnHDgkFfNg_8dbzP9wFoo8DCIElGsllTvcxhfQPtPzS-uK3otG9JxCIT8cSY8XrVbT-MNO17OLBRNobLQQrxgARrEHkJvmeUzm94lukJuvRI3e4Vc6GfbJ_3NrHIp2wsPPf-RC">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dr. Aris Thorne</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">• 1 week ago</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm font-semibold text-primary">Inquiry in Civic Design Lab</span>
+</div>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+              Reading Recommendation Request
+            </span>
+</div>
+<div class="flex flex-col space-y-space-xs">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface leading-snug">
+              Seeking seminal monographs on “Sensory Geography” and acoustic wayfinding in medium-density neighborhoods.
+            </h3>
+<p class="font-body-editorial text-body-editorial text-on-surface-variant leading-relaxed">
+              We are drafting a field study syllabus for autumn regarding how blind and low-vision elders construct mental landmarks from fountain acoustics, bakery venting, and cobblestone vibration transitions. Beyond Yi-Fu Tuan and Kevin Lynch, what contemporary texts have changed the way you perceive neighborhood edges?
+            </p>
+</div>
+<!-- Embedded Curator Recommendation Capsule -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-14 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px] text-on-surface-variant">auto_stories</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">Community Collaborative Reading List</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">11 curated volumes contributed by Civic Design members</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-sm text-label-sm hover:bg-surface-container-highest transition-colors">
+              View Collection (11)
+            </button>
+</div>
+<!-- Footer Actions -->
+<div class="pt-space-xs flex items-center justify-between border-t border-surface-container">
+<div class="flex items-center gap-space-md">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="">31 Recommendations</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="">Contribute a Title</span>
+</button>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="">Civic Lab Open Thread</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function handleAccept() {
+    const tray = document.getElementById('connectionTray');
+    const toast = document.getElementById('acceptedToast');
+    if (tray && toast) {
+      tray.classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        tray.style.display = 'none';
+        toast.classList.remove('hidden');
+      }, 250);
+    }
+  }
+
+  function handleDecline() {
+    const tray = document.getElementById('connectionTray');
+    if (tray) {
+      tray.classList.add('opacity-0', 'scale-95');
+      setTimeout(() => {
+        tray.innerHTML = `
+          <div class="py-2 text-center text-on-surface-variant font-body-sm text-body-sm">
+            Connection request dismissed quietly. Dr. Aris Thorne will not be notified.
+          </div>
+        `;
+        tray.classList.remove('opacity-0', 'scale-95');
+      }, 250);
+    }
+  }
+</script></main><nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md shadow-[0_-2px_12px_rgba(0,0,0,0.05)] px-space-md py-space-xs flex items-center justify-around" data-active-classes="text-primary font-bold"><a aria-current="page" class="flex flex-col items-center gap-0.5 text-primary font-bold" data-path="home-feed" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="">Feed</span></a><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="discover-people" href="#"><span class="material-symbols-outlined text-[20px]">person_search</span><span class="">Discover</span></a><a class="flex flex-col items-center justify-center -mt-4 w-10 h-10 rounded-full bg-primary text-on-primary shadow-[0_4px_12px_rgba(168,50,35,0.3)]" data-path="share-modal" href="#"><span class="material-symbols-outlined text-[22px]">add</span></a><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="communities" href="#"><span class="material-symbols-outlined text-[20px]">groups</span><span class="">Groups</span></a><a class="relative flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="messages" href="#"><span class="material-symbols-outlined text-[20px]">chat_bubble</span><span class="absolute top-0 right-2 w-2 h-2 rounded-full bg-primary"></span><span class="">Chats</span></a></nav><footer class="hidden md:block w-full bg-surface-container-low py-space-xl"><div class="max-w-content-max-layout mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="">© 2025 ConnectHub Inc. Thoughtful connections and mindful communities.</div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">Privacy &amp; Data</a><a class="hover:text-on-surface transition-colors" href="#">Terms</a><a class="hover:text-on-surface transition-colors" href="#">Support</a></div></div></footer>
+
+</body></html>

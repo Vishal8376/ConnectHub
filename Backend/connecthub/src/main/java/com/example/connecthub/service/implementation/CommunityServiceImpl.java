@@ -15,6 +15,7 @@ import com.example.connecthub.service.CommunityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -108,6 +109,16 @@ public class CommunityServiceImpl implements CommunityService {
                         throw new RuntimeException(
                                         "Only the creator can delete the community");
                 }
+
+                List<User> members = new ArrayList<>(community.getUsers());
+
+                for (User user : members) {
+                        user.getCommunities().remove(community);
+                }
+
+                community.getUsers().clear();
+
+                userRepository.saveAll(members);
 
                 communityRepository.delete(community);
         }

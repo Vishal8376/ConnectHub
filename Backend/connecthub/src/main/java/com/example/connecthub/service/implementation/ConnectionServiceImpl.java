@@ -15,6 +15,7 @@ import com.example.connecthub.service.ConnectionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -127,15 +128,16 @@ public class ConnectionServiceImpl implements ConnectionService {
 
                 User user = getUser(email);
 
-                List<ConnectionUserResponse> connections = connectionRepository
-                                .findBySenderIdAndStatus(
-                                                user.getId(),
-                                                ConnectionStatus.ACCEPTED)
-                                .stream()
-                                .map(connection -> mapToUserResponse(
-                                                connection,
-                                                connection.getReceiver()))
-                                .toList();
+                List<ConnectionUserResponse> connections = new ArrayList<>(
+                                connectionRepository
+                                                .findBySenderIdAndStatus(
+                                                                user.getId(),
+                                                                ConnectionStatus.ACCEPTED)
+                                                .stream()
+                                                .map(connection -> mapToUserResponse(
+                                                                connection,
+                                                                connection.getReceiver()))
+                                                .toList());
 
                 connections.addAll(
                                 connectionRepository

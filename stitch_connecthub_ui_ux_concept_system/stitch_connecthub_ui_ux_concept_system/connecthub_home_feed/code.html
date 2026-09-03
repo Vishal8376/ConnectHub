@@ -1,0 +1,663 @@
+<!DOCTYPE html><html lang="en" style="width: 1280px; height: 2406px; overflow: hidden; position: relative;"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#fffbff",
+                "surface-tint": "#ab3425",
+                "on-tertiary-fixed": "#2a1700",
+                "surface-variant": "#dbe5dd",
+                "on-primary-container": "#fffbff",
+                "background": "#f2fcf3",
+                "on-secondary-container": "#3b6d4b",
+                "surface-bright": "#f2fcf3",
+                "primary-container": "#c94a38",
+                "on-surface": "#151d19",
+                "tertiary-fixed": "#ffddb8",
+                "primary": "#a83223",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-fixed-variant": "#653e00",
+                "secondary-container": "#b6edc2",
+                "tertiary": "#825100",
+                "on-secondary": "#ffffff",
+                "secondary-fixed": "#b9efc5",
+                "on-primary": "#ffffff",
+                "surface-container-high": "#e1ebe2",
+                "outline": "#8c716c",
+                "surface-container-highest": "#dbe5dd",
+                "on-background": "#151d19",
+                "inverse-surface": "#29322d",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#00210e",
+                "tertiary-fixed-dim": "#fcba66",
+                "surface-container-lowest": "#ffffff",
+                "secondary": "#376847",
+                "surface-container": "#e6f0e8",
+                "inverse-primary": "#ffb4a8",
+                "tertiary-container": "#9f691d",
+                "surface-dim": "#d2ddd4",
+                "primary-fixed-dim": "#ffb4a8",
+                "primary-fixed": "#ffdad4",
+                "error-container": "#ffdad6",
+                "surface-container-low": "#ecf6ee",
+                "on-surface-variant": "#58413d",
+                "outline-variant": "#e0bfba",
+                "inverse-on-surface": "#e9f3eb",
+                "on-secondary-fixed-variant": "#1e5031",
+                "on-error-container": "#93000a",
+                "on-primary-fixed-variant": "#8a1c10",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#9dd3aa",
+                "surface": "#f2fcf3",
+                "on-primary-fixed": "#410100"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "space-2xl": "3rem",
+                "content-max-layout": "76rem",
+                "space-xl": "2rem",
+                "space-3xl": "4rem",
+                "space-xxs": "0.25rem",
+                "content-max-feed": "42rem",
+                "space-sm": "0.75rem",
+                "space-lg": "1.5rem",
+                "space-md": "1rem",
+                "space-xs": "0.5rem",
+                "content-max-reading": "48rem",
+                "gutter-mobile": "1rem",
+                "gutter-desktop": "2rem"
+        },
+        "fontFamily": {
+                "body-sm": [
+                        "plusJakartaSans"
+                ],
+                "label-lg": [
+                        "plusJakartaSans"
+                ],
+                "headline-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "display-lg-mobile": [
+                        "plusJakartaSans"
+                ],
+                "label-md": [
+                        "plusJakartaSans"
+                ],
+                "body-md": [
+                        "plusJakartaSans"
+                ],
+                "body-editorial": [
+                        "newsreader"
+                ],
+                "label-sm": [
+                        "plusJakartaSans"
+                ],
+                "headline-md": [
+                        "plusJakartaSans"
+                ],
+                "headline-lg": [
+                        "plusJakartaSans"
+                ],
+                "display-lg": [
+                        "plusJakartaSans"
+                ],
+                "body-lg": [
+                        "plusJakartaSans"
+                ]
+        },
+        "fontSize": {
+                "body-sm": [
+                        "13px",
+                        {
+                                "lineHeight": "18px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-lg": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "18px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "26px",
+                        {
+                                "lineHeight": "34px",
+                                "letterSpacing": "-0.015em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "34px",
+                        {
+                                "lineHeight": "42px",
+                                "letterSpacing": "-0.025em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "14px",
+                        {
+                                "lineHeight": "22px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-editorial": [
+                        "19px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "0.005em",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-sm": [
+                        "11px",
+                        {
+                                "lineHeight": "14px",
+                                "letterSpacing": "0.03em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-md": [
+                        "22px",
+                        {
+                                "lineHeight": "30px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "30px",
+                        {
+                                "lineHeight": "38px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "44px",
+                        {
+                                "lineHeight": "52px",
+                                "letterSpacing": "-0.03em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "16px",
+                        {
+                                "lineHeight": "26px",
+                                "letterSpacing": "-0.005em",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-content-max-layout mx-auto px-gutter-mobile lg:px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg shrink-0"><a class="flex items-center gap-space-xs transition-opacity hover:opacity-90" data-path="home-feed" href="#"><img alt="ConnectHub Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UCGDlbFqKRn_56_Njyfdw7b7q_G8ZV7hOUd_TUrkXiGXTGaqDeGO3-A79i9H1nXc4eVCtIw7mNx9wx4hJ3jBD0EYp9o4tKFLquzZLuPGGMuoXHWeqEwB4FbmGoe0DHCd4KC_iVyHFajY8wGc7hQqMgw68DfpmnZFYYuJ_HqRhhcKRYWGoZQFGzu2DuvUz7WvbgHkiJNxJMDeY7wjiQ7RdPfnYq9AxVIFKGPobCuSyyzXkaSLh5EcLonSY"></a><div class="relative hidden xl:block w-72"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span><input class="w-full pl-9 pr-4 py-1.5 rounded-xl bg-surface-container-low text-on-surface placeholder-on-surface-variant text-body-sm font-body-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all" placeholder="Search people, interests, communities..." type="text"></div></div><nav class="hidden md:flex items-center gap-space-md" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors py-1 px-space-xs text-primary font-bold" data-path="home-feed" href="#">Home Feed</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="discover-people" href="#">Discover People</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="my-network" href="#">My Network</a><a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="communities" href="#">Communities</a><a class="relative font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors py-1 px-space-xs" data-path="messages" href="#">Messages<span class="absolute top-1 right-0 w-2 h-2 rounded-full bg-primary"></span></a></nav><div class="flex items-center gap-space-sm shrink-0"><button class="hidden sm:inline-flex items-center gap-space-xxs px-space-sm py-1.5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-colors shadow-[0_2px_8px_rgba(168,50,35,0.2)]" type="button"><span class="material-symbols-outlined text-[18px]">edit_note</span><span class="">Share Post</span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="relative cursor-pointer group"><div class="p-0.5 rounded-full ring-2 ring-surface-container-low transition-all group-hover:ring-outline-variant"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_"></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary ring-2 ring-surface"></span></div></div></div></div></header><main class="w-full pt-16 pb-20 md:pb-12 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="max-w-content-max-layout mx-auto w-full px-gutter-mobile lg:px-gutter-desktop py-space-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg xl:gap-space-xl items-start">
+<!-- LEFT COLUMN: Personal Context & Portals -->
+<aside class="hidden lg:flex lg:col-span-3 flex-col gap-space-lg sticky top-20">
+<!-- Mini Profile Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<div class="relative shrink-0">
+<img alt="Elena Rostova profile avatar" class="w-14 h-14 rounded-full object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_">
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-secondary ring-2 ring-surface-container-low" title="Present &amp; Active"></span>
+</div>
+<div class="min-w-0 flex-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">Elena Rostova</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">Architectural Designer &amp; Ceramicist • San Francisco</p>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-secondary">
+<span class="material-symbols-outlined text-[16px]">diversity_3</span>
+<span class="">428 Connections</span>
+</div>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors flex items-center gap-0.5" href="#">
+<span class="">View Profile</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Your Communities -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Your Circles</h3>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface" href="#">Manage</a>
+</div>
+<div class="flex flex-col gap-space-xs">
+<a class="group flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+</span>
+<div class="truncate">
+<span class="font-label-md text-label-md text-on-surface block truncate">Ceramic Arts Collective</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">42 new thoughts</span>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary shrink-0 ml-1"></span>
+</a>
+<a class="group flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">location_city</span>
+</span>
+<div class="truncate">
+<span class="font-label-md text-label-md text-on-surface block truncate">Civic Design Lab</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">19 new thoughts</span>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary shrink-0 ml-1"></span>
+</a>
+<a class="group flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-primary-fixed text-on-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+</span>
+<div class="truncate">
+<span class="font-label-md text-label-md text-on-surface block truncate">SF Urban Sketchers</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Active meetup Sunday</span>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-surface-variant shrink-0 ml-1"></span>
+</a>
+<a class="group flex items-center justify-between p-space-xs rounded-lg hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">spa</span>
+</span>
+<div class="truncate">
+<span class="font-label-md text-label-md text-on-surface block truncate">Slow Living &amp; Craft</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekly salon open</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+<!-- Shortcuts & Bookmarks -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<a class="flex items-center gap-2.5 px-space-xs py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-primary text-[20px]">bookmark_heart</span>
+<span class="">Saved Thoughts &amp; Threads</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-xs py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-secondary text-[20px]">event_available</span>
+<span class="">Studio Salons &amp; Gatherings</span>
+</a>
+<a class="flex items-center gap-2.5 px-space-xs py-2 rounded-lg text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-tertiary text-[20px]">psychology_alt</span>
+<span class="">Intentional Reading List</span>
+</a>
+</div>
+</aside>
+<!-- CENTER FEED COLUMN -->
+<section class="col-span-1 lg:col-span-6 flex flex-col gap-space-lg min-w-0">
+<!-- Human-Scale Post Composer -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-start gap-space-sm">
+<img alt="Elena Rostova composer avatar" class="w-10 h-10 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_">
+<div class="flex-1">
+<textarea class="w-full bg-surface-container rounded-xl p-3 text-on-surface placeholder-on-surface-variant font-body-md text-body-md resize-none focus:outline-none focus:bg-surface-container-lowest transition-all" placeholder="What are you working on or thinking about today, Elena?" rows="2"></textarea>
+</div>
+</div>
+<div class="mt-space-sm pt-space-xs flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-1">
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">add_photo_alternate</span>
+<span class="">Add Photos</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">label</span>
+<span class="">Tag Circle</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">celebration</span>
+<span class="">Milestone</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs">
+<div class="relative inline-block">
+<select class="bg-surface-container text-on-surface font-label-sm text-label-sm rounded-lg px-2.5 py-1.5 pr-6 focus:outline-none appearance-none cursor-pointer">
+<option value="public">Public Network</option>
+<option value="ceramics">Ceramic Arts Collective</option>
+<option value="civic">Civic Design Lab</option>
+</select>
+<span class="material-symbols-outlined absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[16px]">expand_more</span>
+</div>
+<button class="px-4 py-1.5 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm" type="button">
+                Share Thought
+              </button>
+</div>
+</div>
+</div>
+<!-- Feed Filter Bar (Humanist Tabs) -->
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm">All Reflections</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors">In Your Circles</button>
+<button class="px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors">Deep Conversations</button>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm hidden sm:inline">Sorted by presence</span>
+</div>
+<!-- FEED ITEM 1: Marcus Chen -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Author Header -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Intimate portrait of Marcus Chen, an Asian man in his early 30s with wire-rimmed glasses, wearing a neutral organic linen workshirt in a sunlit architectural studio with natural foliage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTQWx9ESCkZ_hlKgE6S6aWK2I5BNxrtJxtVjwBzhfPYfLwQyY_-4AC1hoYNRLaeZvIZYJ8O7-PcHhOOGL21ucalKHbMFXHEWEW5mIFYGEBiS5eIBvVd502Weg3oeNPkQtOmKBOT0ScdylTbHm7Ulw4A-PoEGTX6gLnUUX_b_XGWFufau_mP9rqqFtGhpPYdOmm0LMx7rvqEetoosUMUVb_YZXT_ROxTbpCO0z8n23HB40J5JQC9hE0">
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Marcus Chen</h3>
+<span class="text-on-surface-variant text-body-sm">•</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full">Civic Design Lab</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Landscape Architect &amp; Biophilic Designer • Portland</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">nature_people</span>
+<span class="">Connected with Elena &amp; 4 others</span>
+<span class="">•</span>
+<span class="">2h ago</span>
+</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<!-- Post Content -->
+<div class="flex flex-col gap-space-sm">
+<p class="font-body-editorial text-body-editorial text-on-surface leading-relaxed">
+              We spent the morning testing bioswale water retention curves on the Southeast 12th Avenue redevelopment. Rather than burying stormwater runoff in subterranean conduits, our intent is to invite urban dwellers to witness rainfall as living landscape infrastructure.
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Notice how the permeable basalt pavers slow the velocity just enough for native sedge roots to naturally filter micro-sediments before reaching the aquifer. Honest textures in civil engineering keep citizens connected to regional hydrology.
+            </p>
+</div>
+<!-- Studio & Sketch Photography Mosaic -->
+<div class="grid grid-cols-2 gap-2 rounded-xl overflow-hidden">
+<img class="w-full h-56 object-cover hover:scale-[1.01] transition-transform duration-300" data-alt="A candid documentary photo of an open landscape architecture studio table with hand-drawn water drainage sketches, field notebooks, and miniature basalt paver samples under soft morning natural window light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF6kQrdu_JZH7KMj7b9heS_bI_besCiQNof6faoU2xv6HfMJEcS2v2jvjl1_btK9RJ_NuCoZt75aH6IDEFcVpxXVaa0XYA5FAhCIi7FUyYhBLyP-X4edQUhTS6dmMJybK45WbPC-ZHcWRMwJaBt4hLG6mkvfytFn7gaAY3-xwBi8Cmi2huADf2bueZlSsOzUDo3GCEjdyWWcp_F4TPaAcG218fIzTK4gyxY5RZrhx3p23UTW5HqbaF">
+<img class="w-full h-56 object-cover hover:scale-[1.01] transition-transform duration-300" data-alt="Close up architectural detail of a biophilic stone water trench in an eco-urban sidewalk, gentle clear water trickling over moss-dappled cobblestones and vibrant wild grasses." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPQzZeJb6MO_BYzqGrxgg0ZkifB7MBykD7q54irFC-9Vebdn1dRod4n-oeht2l3Jxqa9gAcTmvPCaoTtfsUif-7xzeAqc0fvbrQyYeoONEOTeKLTTKDo_7UCXbCKP4dP-1qXws01dZh0YgJqeGFf--yq4NBdNN-RQdEq25v72z_Tcxw4qXLMoDtOlXLTYWH75o4OiCjtKovVeLsR1u_WW2ymIoGajREfSetHhfyrAleQ9DL206Azbw">
+</div>
+<!-- Conversational Engagement Bar -->
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-[18px]">favorite</span>
+<span class="">Appreciate (32)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chat_bubble_outline</span>
+<span class="">Join Discussion (14)</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Bookmark for later reflection" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" title="Pass quietly to a peer" type="button">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</div>
+<!-- Inline Active Comment Thread -->
+<div class="bg-surface-container rounded-xl p-space-sm flex flex-col gap-space-sm">
+<div class="flex items-start gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Headshot of Sarah Lin, a woman with a warm friendly expression and dark hair tied in a loose bun, wearing a muted green knit sweater." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC05IG8yFUiVRo7XV1pJvwD4kNflFjvMkHCpdC35ddlqf9R5dkPxvSyf4qVmoFKjYhWtrUR__JSB9EnsnjDJ-4poso0UhS3ram3uIK6xIDUkarRPHkeMfhVyNrz3v6g1FYPwp-NciSqvSakBZloD8Ku5oyIldYMHmKOcIKfbTNMMyc6HsG0QXQZXAGUpAJ3Y32yuTJcb-T0kNITTQw7m_MyB2F7GdH8osjMg4sIKsabTLEVywTOl9Dh">
+<div class="flex-1 bg-surface-container-lowest rounded-xl p-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Sarah Lin</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-1">
+                  The retention curves look so much gentler than the standard municipal basin codes. Are you planning an interpretive plaque so pedestrian foot traffic understands the seasonal water pooling?
+                </p>
+<div class="mt-2 flex items-center gap-3">
+<button class="font-label-sm text-label-sm text-primary font-medium">Reply</button>
+<button class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">favorite</span>
+<span class="">4</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Comment Input Well -->
+<div class="flex items-center gap-2 pt-1">
+<img alt="Elena Rostova reply avatar" class="w-7 h-7 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVHSSLsb31EZ-bXTHL_JHtrJ7QUGwoREW_xecAxDc6FpyevONz82d4e-CQt3wheMIml72baJWWoRILLNfdoAYGxbJJWooSfIYSym7yYBp1usFoWeCgnwABPKdMQQDBoZ6sjW7q-6UUuTf5XM66TRGykDuzwJppE6XEnSQJHeh28E-d04W8nKkbO4qItTRfNa9B0ZX_PaM3cRtshMfLXBb4nm5ceJlPOSzj_eBSo99dh2Zv_6nCt38_">
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder-on-surface-variant rounded-lg px-3 py-1.5 font-body-sm text-body-sm focus:outline-none" placeholder="Add to Marcus's design dialogue..." type="text">
+<button class="p-1.5 rounded-lg bg-secondary text-on-secondary shrink-0 hover:bg-secondary/90 transition-colors">
+<span class="material-symbols-outlined text-[16px]">send</span>
+</button>
+</div>
+</div>
+</article>
+<!-- FEED ITEM 2: Priya Sharma -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Author Header -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Natural portrait of Priya Sharma, a South Asian artisan woodworker with focused observant eyes, wearing a canvas work apron over a soft ochre shirt in an open timber workshop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg5YbXNVts8Fe7RLLMWlg3pzYL_aLAG5N5afcIUJdtUgJLvuooqU5EcIxH7LnOVaWFZRJcsxLVTuDqnMXZ7u9YY_aNNTDLGsw_bqWG4ICPUROreqLS3eXWiYtrB1Wx7QKVFb2erZoeX5D5pG2kQ4pE3vllsb5Mm1sQ_b7sAWEb4bHis1bibblRcyS5O4_UmqWVkKJVPi14LFYyiEUyPVV5je6AZYx9m_70QdpFD7EZyK0iP5Fc1jcc">
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Priya Sharma</h3>
+<span class="text-on-surface-variant text-body-sm">•</span>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 px-2 py-0.5 rounded-full">Shared Interest: Sustainable Craft</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Woodworking artisan &amp; Furniture Designer • Austin</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="">Recommended for you</span>
+<span class="">•</span>
+<span class="">4h ago</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1 rounded-xl bg-surface text-primary font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all" type="button">
+              Follow Work
+            </button>
+</div>
+<!-- Post Content -->
+<div class="flex flex-col gap-space-sm">
+<p class="font-body-editorial text-body-editorial text-on-surface leading-relaxed">
+              Mortise and tenon joint exploration for the low cedar bench. There is something deeply grounding about listening to the chisel enter air-dried black walnut. No fasteners, no synthetic glues.
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Quick question for the craft community: What are your preferred zero-VOC plant oils that preserve walnut’s cool violet undertones without ambering them over the first two winters? Would love your lived experiences with cold-pressed Swedish flax versus tung formulations.
+            </p>
+</div>
+<!-- Woodworking Insight Image -->
+<div class="rounded-xl overflow-hidden">
+<img class="w-full h-72 object-cover" data-alt="Tactile warm close-up photography of hand-planed American black walnut wood joints with visible grain patterns, resting on a clean wooden workbench alongside traditional Japanese hand tools." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0otJsFcKVzpZTCWRnpxNbORDd8mXWFNU669sH4JSdZvPYyeXJeJ0TPGNvY47Nwdubj6BAfO769LY_k18vc_lDAiAhuHJfIwIIjfDzecmcXHTEcdtqXrq4MwiYSiqQjWGcBNUmhRyNL2fF5LViBbxpttvliC_qRvo0tONLmrNgQTd0WCYF8jR1lOiZRHsaQfCQTQlRblzGGfou6yZ8WjrysBQ7nHpbRxleh8m_XbBozGwzYXaTHQnc">
+</div>
+<!-- Conversational Engagement Bar -->
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-[18px]">local_florist</span>
+<span class="">Appreciate (48)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+<span class="">Responses (22 craftsmen)</span>
+</button>
+</div>
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+</div>
+</article>
+<!-- FEED ITEM 3: David Kalu -->
+<article class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-md">
+<!-- Author Header -->
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="relative shrink-0">
+<img class="w-11 h-11 rounded-full object-cover" data-alt="Portrait of David Kalu, a Black man in his late 30s with a thoughtful, engaging smile, wearing a navy mock neck sweater in an architectural community room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2Hp5kV3jYLAZL8ts3TF0Dy6bROhBNhifjVOjx17gz87hxIeyBSJRMxoHj598X-nRNWz65DPxa4TrqgaONN-R3GQLxBhmZLp_DRdHqe3XM_sxMAwK7nXfYj9zv5xI9TR-KmtdfDzjXRUxg8bxa11lRFOwBy-ehiKaF54iHgp1GwA7ftv6MAPkXBiGS6nAvjaD-VFDayXXAtxvBt-Z9kWSNEYWEaXK_kfUU42g-fEiQHZgT5egFjHWU">
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">David Kalu</h3>
+<span class="text-on-surface-variant text-body-sm">•</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/40 px-2 py-0.5 rounded-full">1st Degree Connected</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Urban Planner &amp; Community Organizer • Chicago</p>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mt-0.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="">Yesterday at dusk</span>
+</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-lg" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<!-- Thoughtful Content -->
+<div class="flex flex-col gap-space-sm">
+<p class="font-body-editorial text-body-editorial text-on-surface leading-relaxed">
+              When we host participatory design workshops, the single biggest breakthrough is always putting tracing paper directly into residents’ hands rather than presenting polished rendering slides.
+            </p>
+<div class="bg-surface p-4 rounded-xl">
+<p class="font-body-md text-body-md text-on-surface italic">
+                “People do not resist change; they resist being excluded from the storytelling that envisions it.”
+              </p>
+<span class="block text-right font-label-sm text-label-sm text-on-surface-variant mt-2">— Woodlawn Community Center session, 18 neighbors present</span>
+</div>
+</div>
+<!-- Conversational Engagement Bar -->
+<div class="pt-space-xs flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-primary text-[18px]">thumb_up</span>
+<span class="">Reflect &amp; Appreciate (59)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">mode_comment</span>
+<span class="">Contribute Perspective (8)</span>
+</button>
+</div>
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</article>
+</section>
+<!-- RIGHT COLUMN: Serendipitous Discovery & Sparks -->
+<aside class="hidden xl:flex xl:col-span-3 flex-col gap-space-lg sticky top-20">
+<!-- People You May Want to Know -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fellow Creators</h3>
+<span class="font-label-sm text-label-sm text-secondary">Discover</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Person 1: Mateo Rossi -->
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-start gap-2.5 min-w-0">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Portrait of Mateo Rossi, an Italian industrial designer with gentle warm smile, working in an open sunlit studio surrounded by prototypes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTvNUXY3PXzN0-onXEMZjCQ_wy3O8217I2aUZjmeoN8AKxXq5Dloms-VuesdWwEVkTQqlDZvcVkWq40ckuquZj_our_kVLVWmBC9IWVsL7gRvkbodnM7BWDaKfKXqrQ4zsG3aikXzzaPCAEgHCM-7edDx7oSvsG8aSIJJ4LKEjCztoOS_SjmjHWfM8qA6SRQ_xzg225TBX03VzZPD6lSx--G5_0JcaawAZ570-o6gzA0wOm0lGBtfH">
+<div class="min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface truncate">Mateo Rossi</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Materials Researcher • RISD Alum</p>
+<span class="font-label-sm text-label-sm text-secondary block mt-0.5">In Ceramic Arts Collective</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded-xl bg-surface text-primary font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all shrink-0" type="button">
+                Connect
+              </button>
+</div>
+<!-- Person 2: Maya Lindqvist -->
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex items-start gap-2.5 min-w-0">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Portrait of Maya Lindqvist, Scandinavian interior architect with blonde hair and minimalist linen top, soft neutral aesthetic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDUjL5R2CqcvXVDwJNjmuKRLpXmNPL5bb1f4Is-LuFe2t4okhvG9H9zewshvi0wUnpWr4aUybuH4iiLkHjKgaGK17GSAacaU-AJsXi_zZqtuvacsJq-N7_UDXP4MKCwSWI5X6Tm7XJfnuHSdAuxOS35dJ4bScVUR_91CHNZCS3uQ5YPl-i0rVitv6e-zcma0UFBwwZHNApY-48yxOwQDZI_Ykz9mmw3Nx0REuT7TIlYyTSTdDKrlIP">
+<div class="min-w-0">
+<h4 class="font-label-lg text-label-lg text-on-surface truncate">Maya Lindqvist</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Biophilic Interior Architect</p>
+<span class="font-label-sm text-label-sm text-secondary block mt-0.5">3 shared peers</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded-xl bg-surface text-primary font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-all shrink-0" type="button">
+                Connect
+              </button>
+</div>
+</div>
+</div>
+<!-- Active Community Salons & Conversations -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Gathering Sparks</h3>
+<div class="flex flex-col gap-space-sm">
+<a class="p-2.5 rounded-lg bg-surface hover:bg-surface-container transition-colors block" href="#">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Live Voice Salon</span>
+<p class="font-label-md text-label-md text-on-surface mt-1">Reclaiming Public Green Spaces in Mid-Size Cities</p>
+<div class="flex items-center gap-2 mt-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">mic</span>
+<span class="">Civic Design Lab • 18 listening</span>
+</div>
+</a>
+<a class="p-2.5 rounded-lg bg-surface hover:bg-surface-container transition-colors block" href="#">
+<span class="font-label-sm text-label-sm text-secondary uppercase font-bold tracking-wider">Showcase Thread</span>
+<p class="font-label-md text-label-md text-on-surface mt-1">First-firing terracotta vessels with wild river clay</p>
+<div class="flex items-center gap-2 mt-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-tertiary">spa</span>
+<span class="">Ceramic Arts • 27 responses</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Mindful Principles & Footer Note -->
+<div class="px-space-xs flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">energy_savings_leaf</span>
+<span class="">ConnectHub Calm Architecture</span>
+</div>
+<p class="font-body-sm text-body-sm leading-relaxed">
+            No infinite doom-scroll. No metric anxiety. Real craftsmanship, civic space, and human thoughts.
+          </p>
+<div class="flex flex-wrap gap-x-3 gap-y-1 font-label-sm text-label-sm text-on-surface-variant pt-2">
+<a class="hover:text-on-surface" href="#">Manifesto</a>
+<a class="hover:text-on-surface" href="#">Community Ethics</a>
+<a class="hover:text-on-surface" href="#">Gentle Notifications</a>
+<a class="hover:text-on-surface" href="#">Privacy</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div></main><nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md shadow-[0_-2px_12px_rgba(0,0,0,0.05)] px-space-md py-space-xs flex items-center justify-around" data-active-classes="text-primary font-bold"><a aria-current="page" class="flex flex-col items-center gap-0.5 text-primary font-bold" data-path="home-feed" href="#"><span class="material-symbols-outlined text-[20px]">home</span><span class="">Feed</span></a><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="discover-people" href="#"><span class="material-symbols-outlined text-[20px]">person_search</span><span class="">Discover</span></a><a class="flex flex-col items-center justify-center -mt-4 w-10 h-10 rounded-full bg-primary text-on-primary shadow-[0_4px_12px_rgba(168,50,35,0.3)]" data-path="share-modal" href="#"><span class="material-symbols-outlined text-[22px]">add</span></a><a class="flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="communities" href="#"><span class="material-symbols-outlined text-[20px]">groups</span><span class="">Groups</span></a><a class="relative flex flex-col items-center gap-0.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" data-path="messages" href="#"><span class="material-symbols-outlined text-[20px]">chat_bubble</span><span class="absolute top-0 right-2 w-2 h-2 rounded-full bg-primary"></span><span class="">Chats</span></a></nav><footer class="hidden md:block w-full bg-surface-container-low py-space-xl"><div class="max-w-content-max-layout mx-auto px-gutter-desktop flex flex-col sm:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-on-surface-variant"><div class="">© 2025 ConnectHub Inc. Thoughtful connections and mindful communities.</div><div class="flex items-center gap-space-lg"><a class="hover:text-on-surface transition-colors" href="#">Guidelines</a><a class="hover:text-on-surface transition-colors" href="#">Privacy &amp; Data</a><a class="hover:text-on-surface transition-colors" href="#">Terms</a><a class="hover:text-on-surface transition-colors" href="#">Support</a></div></div></footer>
+
+<div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
