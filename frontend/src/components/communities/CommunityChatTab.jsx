@@ -41,9 +41,16 @@ export default function CommunityChatTab({ community }) {
       }
 
       // Initialize STOMP Client
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const host = window.location.host;
-      const wsUrl = `${protocol}//${host}/ws`;
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://connecthub-0h9a.onrender.com/api';
+      let wsUrl;
+      if (apiUrl.startsWith('http://') || apiUrl.startsWith('https://')) {
+        const parsedUrl = new URL(apiUrl);
+        const wsProtocol = parsedUrl.protocol === 'https:' ? 'wss:' : 'ws:';
+        wsUrl = `${wsProtocol}//${parsedUrl.host}/ws`;
+      } else {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        wsUrl = `${protocol}//${window.location.host}/ws`;
+      }
 
       const client = new Client({
         brokerURL: wsUrl,

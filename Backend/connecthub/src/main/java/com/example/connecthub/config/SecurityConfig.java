@@ -44,7 +44,12 @@ public class SecurityConfig {
                 CorsConfiguration configuration = new CorsConfiguration();
 
                 configuration.setAllowedOriginPatterns(
-                                List.of("*"));
+                                List.of(
+                                                "http://localhost:5173",
+                                                "http://localhost:5174",
+                                                "https://connect-hub-gamma-pink.vercel.app",
+                                                "https://*.vercel.app",
+                                                "*"));
 
                 configuration.setAllowedMethods(
                                 List.of(
@@ -56,10 +61,7 @@ public class SecurityConfig {
                                                 HttpMethod.OPTIONS.name()));
 
                 configuration.setAllowedHeaders(
-                                List.of(
-                                                "Authorization",
-                                                "Content-Type",
-                                                "Accept"));
+                                List.of("*"));
 
                 configuration.setAllowCredentials(true);
 
