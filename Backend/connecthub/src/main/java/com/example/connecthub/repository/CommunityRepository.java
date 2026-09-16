@@ -11,4 +11,5 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
 
     boolean existsByName(String name);
 
-}
+    java.util.List<Community> findTop5ByNameStartingWithIgnoreCaseOrderByNameAsc(String query);
+}

@@ -32,4 +32,14 @@ public interface CommunityService {
     void leaveCommunity(
             Long id,
             String email);
-}
+
+    com.example.connecthub.dto.response.CommunityJoinRequestResponse createJoinRequest(Long communityId, String email);
+
+    List<com.example.connecthub.dto.response.CommunityJoinRequestResponse> getJoinRequestsForCommunity(Long communityId, String email);
+
+    com.example.connecthub.dto.response.CommunityJoinRequestResponse acceptJoinRequest(Long requestId, String email);
+
+    com.example.connecthub.dto.response.CommunityJoinRequestResponse rejectJoinRequest(Long requestId, String email);
+
+    void cancelJoinRequest(Long communityId, String email);
+}

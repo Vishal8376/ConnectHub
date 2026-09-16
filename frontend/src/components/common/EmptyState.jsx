@@ -1,25 +1,27 @@
 import React from 'react';
 
-const EmptyState = ({
-  icon: Icon,
-  title = 'Nothing here yet',
-  description = 'Start exploring communities and connecting with people around you.',
-  action,
-}) => {
+export default function EmptyState({
+  icon = 'inbox',
+  title = 'No items found',
+  description = 'There are no items to display at this time.',
+  actionLabel,
+  onAction,
+}) {
   return (
-    <div className="bg-surface-elevated border border-hairline rounded-card p-10 text-center flex flex-col items-center justify-center space-y-4">
-      {Icon && (
-        <div className="w-14 h-14 rounded-full bg-surface-recessed flex items-center justify-center text-ink-muted">
-          <Icon className="w-7 h-7 stroke-[1.5]" />
-        </div>
-      )}
-      <div className="max-w-md space-y-1.5">
-        <h3 className="font-headline-sm text-ink-primary font-semibold">{title}</h3>
-        <p className="font-body-editorial text-ink-muted leading-relaxed">{description}</p>
+    <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-8 text-center flex flex-col items-center justify-center my-4 shadow-sm">
+      <div className="w-14 h-14 rounded-full bg-surface-container-low text-primary-container flex items-center justify-center mb-3">
+        <span className="material-symbols-outlined text-[32px]">{icon}</span>
       </div>
-      {action && <div className="pt-2">{action}</div>}
+      <h3 className="font-headline-sm text-lg font-bold text-on-surface mb-1">{title}</h3>
+      <p className="font-body-md text-sm text-on-surface-variant max-w-md mb-4">{description}</p>
+      {actionLabel && onAction && (
+        <button
+          onClick={onAction}
+          className="px-5 py-2 rounded-full bg-primary-container text-on-primary font-label-md hover:bg-primary transition-colors active:scale-95 shadow-sm"
+        >
+          {actionLabel}
+        </button>
+      )}
     </div>
   );
-};
-
-export default EmptyState;
+}

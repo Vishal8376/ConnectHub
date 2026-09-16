@@ -1,29 +1,36 @@
-import client from './client'
+import client from './client';
 
-export function sendConnectionRequest(userId) {
-  return client.post(`/connections/${userId}`).then((res) => res.data)
-}
+export const sendConnectionRequest = async (userId) => {
+  const response = await client.post(`/connections/${userId}`);
+  return response.data;
+};
 
-export function getReceivedRequests() {
-  return client.get('/connections/received').then((res) => res.data)
-}
+export const getReceivedRequests = async () => {
+  const response = await client.get('/connections/received');
+  return response.data;
+};
 
-export function getSentRequests() {
-  return client.get('/connections/sent').then((res) => res.data)
-}
+export const getSentRequests = async () => {
+  const response = await client.get('/connections/sent');
+  return response.data;
+};
 
-export function getAcceptedConnections() {
-  return client.get('/connections').then((res) => res.data)
-}
+export const getConnections = async () => {
+  const response = await client.get('/connections');
+  return response.data;
+};
 
-export function acceptConnection(connectionId) {
-  return client.put(`/connections/${connectionId}/accept`).then((res) => res.data)
-}
+export const acceptConnection = async (connectionId) => {
+  const response = await client.put(`/connections/${connectionId}/accept`);
+  return response.data;
+};
 
-export function rejectConnection(connectionId) {
-  return client.put(`/connections/${connectionId}/reject`).then((res) => res.data)
-}
+export const rejectConnection = async (connectionId) => {
+  const response = await client.put(`/connections/${connectionId}/reject`);
+  return response.data;
+};
 
-export function removeConnection(connectionId) {
-  return client.delete(`/connections/${connectionId}`)
-}
+export const removeConnection = async (connectionId) => {
+  const response = await client.delete(`/connections/${connectionId}`);
+  return response.data;
+};

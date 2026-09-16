@@ -1,364 +1,180 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { User, Edit3, MapPin, GraduationCap, Briefcase, Mail, X, FileText, Check } from 'lucide-react';
-import client from '../api/client';
-import { useAuth } from '../context/AuthContext';
-import { useConnections } from '../hooks/useConnections';
-import AppLayout from '../components/layout/AppLayout';
+import { useParams, useNavigate } from 'react-router-dom';
+import Layout from '../components/common/Layout';
 import Avatar from '../components/common/Avatar';
-import RelationshipButton from '../components/common/RelationshipButton';
-import PostCard from '../components/feed/PostCard';
-import { CardSkeleton } from '../components/common/LoadingSkeleton';
+import Badge from '../components/common/Badge';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import { searchUsers } from '../api/users';
+import { sendConnectionRequest } from '../api/connections';
 
-const UserProfilePage = () => {
-  const { currentUser, updateProfile } = useAuth();
-  const location = useLocation();
+export default function UserProfilePage() {
+  const { userId } = useParams();
   const navigate = useNavigate();
-  const {
-    getRelationshipStatus,
-    sendRequest,
-    acceptRequest,
-    rejectRequest,
-    removeConnection,
-  } = useConnections();
 
-  // If a viewing user is passed via state, display their info; otherwise display currentUser
-  const targetUserFromState = location.state?.user || null;
-  const isOwnProfile = !targetUserFromState || targetUserFromState.id === currentUser?.id;
-  const profileUser = isOwnProfile ? currentUser : targetUserFromState;
+  const [targetUser, setTargetUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [connecting, setConnecting] = useState(false);
+  const [error, setError] = useState('');
 
-  // Current user's posts (only loaded when isOwnProfile is true)
-  const [ownPosts, setOwnPosts] = useState([]);
-  const [loadingPosts, setLoadingPosts] = useState(false);
-
-  // Edit Profile modal state
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editForm, setEditForm] = useState({
-    fullName: currentUser?.fullName || '',
-    bio: currentUser?.bio || '',
-    college: currentUser?.college || '',
-    profession: currentUser?.profession || '',
-    location: currentUser?.location || '',
-    profilePicture: currentUser?.profilePicture || '',
-  });
-
-  const [savingProfile, setSavingProfile] = useState(false);
-  const [editError, setEditError] = useState(null);
-
-  /*
-   * BACKEND LIMITATION COMMENT:
-   * PostResponse.author is a plain String (post.getUser().getFullName()) — not a user ID.
-   * There is no GET /api/posts/user/{userId} endpoint.
-   * Per explicit prompt instruction:
-   * 1. Posts tab is rendered ONLY on the logged-in user's own profile.
-   * 2. Filtered client-side via post.author === currentUser.fullName.
-   * 3. Omitted on other users' profiles to prevent misattribution.
-   * 4. No post count stats displayed.
-   */
   useEffect(() => {
-    if (isOwnProfile && currentUser) {
-      const fetchMyPosts = async () => {
-        setLoadingPosts(true);
-        try {
-          const res = await client.get('/posts');
-          const myPosts = (res.data || []).filter(
-            (p) => p.author === currentUser.fullName
-          );
-          setOwnPosts(myPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        } catch (err) {
-          console.error('Failed to fetch user posts:', err);
-        } finally {
-          setLoadingPosts(false);
+    async function loadUser() {
+      setLoading(true);
+      setError('');
+      try {
+        const results = await searchUsers({ name: '' });
+        const found = (results || []).find((u) => u.id === Number(userId));
+        if (found) {
+          setTargetUser(found);
+        } else {
+          setError('User profile not found.');
         }
-      };
-      fetchMyPosts();
+      } catch (err) {
+        setError(err.message || 'Failed to load user profile');
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [isOwnProfile, currentUser]);
+    loadUser();
+  }, [userId]);
 
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
-    setSavingProfile(true);
-    setEditError(null);
+  const handleConnect = async () => {
+    setConnecting(true);
     try {
-      await updateProfile({
-        fullName: editForm.fullName.trim(),
-        bio: editForm.bio.trim() || null,
-        college: editForm.college.trim() || null,
-        profession: editForm.profession.trim() || null,
-        location: editForm.location.trim() || null,
-        profilePicture: editForm.profilePicture.trim() || null,
-      });
-      setIsEditModalOpen(false);
+      await sendConnectionRequest(userId);
+      setTargetUser((prev) => (prev ? { ...prev, connectionStatus: 'sent' } : prev));
     } catch (err) {
-      setEditError(err.message || 'Failed to update profile');
+      alert(err.message || 'Failed to send connection request');
     } finally {
-      setSavingProfile(false);
+      setConnecting(false);
     }
   };
 
-  if (!profileUser) {
-    return (
-      <AppLayout>
-        <CardSkeleton />
-      </AppLayout>
-    );
-  }
-
-  const relationship = !isOwnProfile ? getRelationshipStatus(profileUser.id) : null;
-
   return (
-    <AppLayout>
-      <div className="space-y-6">
-        {/* Cover Photo & Circular Avatar Header per Stitch Mockup */}
-        <div className="bg-surface-elevated border border-hairline rounded-card overflow-hidden shadow-xs relative">
-          {/* Cover backdrop */}
-          <div className="h-36 bg-gradient-to-r from-clay/20 via-ochre/15 to-sage/20 border-b border-hairline" />
+    <Layout>
+      <div className="max-w-4xl mx-auto flex flex-col gap-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-1.5 text-xs font-bold text-on-surface-variant hover:text-primary transition-colors self-start"
+        >
+          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          <span>Back</span>
+        </button>
 
-          {/* Identity Header */}
-          <div className="px-6 pb-6 pt-0 relative flex flex-col md:flex-row md:items-end justify-between gap-4 -mt-12">
-            <div className="flex flex-col md:flex-row md:items-end gap-4">
-              <Avatar
-                src={profileUser.profilePicture}
-                name={profileUser.fullName}
-                size="xl"
-                className="ring-4 ring-canvas border-2 border-hairline shadow-md"
-              />
-              <div className="space-y-1">
-                <h1 className="font-headline-lg text-ink-primary font-bold text-2xl">
-                  {profileUser.fullName}
-                </h1>
-                <p className="text-sm font-medium text-clay">
-                  {profileUser.profession || profileUser.college || 'ConnectHub Member'}
-                </p>
-              </div>
-            </div>
-
-            {/* Action Button: Edit Profile (Own) or Relationship Button (Other) */}
-            <div className="pt-2 md:pt-0">
-              {isOwnProfile ? (
-                <button
-                  onClick={() => {
-                    setEditForm({
-                      fullName: currentUser.fullName || '',
-                      bio: currentUser.bio || '',
-                      college: currentUser.college || '',
-                      profession: currentUser.profession || '',
-                      location: currentUser.location || '',
-                      profilePicture: currentUser.profilePicture || '',
-                    });
-                    setIsEditModalOpen(true);
-                  }}
-                  className="px-4 py-2 rounded-control bg-surface-recessed text-ink-primary border border-hairline font-semibold text-sm hover:bg-hairline transition-colors flex items-center gap-1.5 shadow-xs"
-                >
-                  <Edit3 className="w-4 h-4 text-clay" />
-                  Edit Profile
-                </button>
-              ) : (
-                <RelationshipButton
-                  targetUserId={profileUser.id}
-                  relationship={relationship}
-                  onSendRequest={sendRequest}
-                  onAcceptRequest={acceptRequest}
-                  onRejectRequest={rejectRequest}
-                  onRemoveConnection={removeConnection}
-                />
-              )}
-            </div>
-          </div>
-
-          {/* Profile Details Block */}
-          <div className="px-6 pb-6 border-t border-hairline/60 pt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-ink-muted">
-            {profileUser.college && (
-              <div className="flex items-center gap-2">
-                <GraduationCap className="w-4 h-4 text-clay shrink-0" />
-                <span className="truncate">{profileUser.college}</span>
-              </div>
-            )}
-            {profileUser.profession && (
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-sage shrink-0" />
-                <span className="truncate">{profileUser.profession}</span>
-              </div>
-            )}
-            {profileUser.location && (
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-ochre shrink-0" />
-                <span className="truncate">{profileUser.location}</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Bio Quote Panel */}
-        {profileUser.bio && (
-          <div className="bg-surface-elevated border border-hairline rounded-card p-6 space-y-2">
-            <h3 className="text-xs font-semibold text-ink-muted uppercase tracking-wider">
-              About & Background
-            </h3>
-            <p className="font-body-editorial text-ink-primary text-lg leading-relaxed italic">
-              "{profileUser.bio}"
-            </p>
-          </div>
-        )}
-
-        {/* 
-          Conditional Content Tabs:
-          - OWN PROFILE: Displays "My Published Posts" tab.
-          - OTHER PROFILE: Displays real profile fields only (omitted post tab to avoid author string misattribution).
-        */}
-        {isOwnProfile ? (
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 border-b border-hairline pb-2">
-              <span className="font-headline-sm font-bold text-ink-primary text-base flex items-center gap-2">
-                <FileText className="w-4 h-4 text-clay" />
-                My Published Posts
-              </span>
-            </div>
-
-            {loadingPosts ? (
-              <CardSkeleton />
-            ) : ownPosts.length === 0 ? (
-              <div className="bg-surface-elevated border border-hairline rounded-card p-8 text-center text-ink-muted font-body-editorial text-base">
-                You haven't created any posts yet. Publish a post from the Home Feed or Community pages.
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {ownPosts.map((post) => (
-                  <PostCard
-                    key={post.id}
-                    post={post}
-                    onPostDeleted={(id) => setOwnPosts((prev) => prev.filter((p) => p.id !== id))}
-                    onPostUpdated={(updated) =>
-                      setOwnPosts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)))
-                    }
-                  />
-                ))}
-              </div>
-            )}
+        {loading ? (
+          <LoadingSpinner label="Loading user profile..." />
+        ) : error || !targetUser ? (
+          <div className="p-4 bg-error-container text-on-error-container rounded-2xl text-center text-sm font-medium">
+            {error || 'User not found'}
           </div>
         ) : (
-          <div className="bg-surface-elevated border border-hairline rounded-card p-6 space-y-4">
-            <h3 className="font-headline-sm font-bold text-ink-primary text-base">
-              Member Profile Overview
-            </h3>
-            <div className="space-y-2 text-sm text-ink-muted font-body-editorial">
-              <p>
-                Connected member on ConnectHub. Message or interact directly when connected.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Edit Profile Modal */}
-        {isEditModalOpen && (
-          <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-            <div
-              className="bg-surface-elevated border border-hairline rounded-card w-full max-w-lg shadow-modal space-y-5 p-6 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between border-b border-hairline pb-4">
-                <h2 className="font-headline-sm font-bold text-ink-primary">Edit Your Profile</h2>
-                <button
-                  onClick={() => setIsEditModalOpen(false)}
-                  className="p-1 rounded-control text-ink-muted hover:bg-surface-recessed"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+          <div className="flex flex-col gap-6">
+            {/* Header Banner Card */}
+            <div className="bg-surface border border-outline-variant/30 rounded-3xl overflow-hidden shadow-xs relative">
+              <div className="h-40 bg-gradient-to-r from-secondary-container via-surface-dim to-tertiary-container/50 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#1F2421_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute top-4 right-4">
+                  <Badge variant="secondary" className="text-xs font-bold shadow-xs">
+                    Network Peer
+                  </Badge>
+                </div>
               </div>
 
-              {editError && (
-                <div className="p-3 rounded-control bg-red-50 text-red-700 text-xs border border-red-200">
-                  {editError}
+              <div className="p-6 pt-0 relative flex flex-col md:flex-row md:items-end justify-between gap-5">
+                <div className="flex flex-col md:flex-row items-start md:items-end gap-5 -mt-14">
+                  <Avatar
+                    src={targetUser.profilePicture}
+                    name={targetUser.fullName}
+                    size="xl"
+                    className="ring-4 ring-surface shadow-md"
+                  />
+                  <div className="flex flex-col mb-1">
+                    <h1 className="font-headline-lg text-2xl md:text-3xl font-bold text-on-surface">
+                      {targetUser.fullName || 'Network Member'}
+                    </h1>
+                    {targetUser.profession && (
+                      <p className="text-sm font-bold text-primary mt-1 flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[16px]">work</span>
+                        <span>{targetUser.profession}</span>
+                      </p>
+                    )}
+                    <div className="flex items-center gap-4 text-xs text-on-surface-variant font-semibold mt-1.5 flex-wrap">
+                      {targetUser.college && (
+                        <span className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[15px]">school</span>
+                          <span>{targetUser.college}</span>
+                        </span>
+                      )}
+                      {targetUser.location && (
+                        <span className="flex items-center gap-1">
+                          <span className="material-symbols-outlined text-[15px]">location_on</span>
+                          <span>{targetUser.location}</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 self-start md:self-end">
+                  {targetUser.connectionStatus === 'accepted' ? (
+                    <button
+                      onClick={() => navigate(`/messages?userId=${targetUser.id}`)}
+                      className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-on-primary text-xs font-bold hover:bg-primary/90 transition-all shadow-xs"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">chat</span>
+                      <span>Send Direct Message</span>
+                    </button>
+                  ) : targetUser.connectionStatus === 'sent' ? (
+                    <Badge variant="warning" className="px-5 py-2.5 text-xs font-bold">
+                      Connection Request Pending
+                    </Badge>
+                  ) : (
+                    <button
+                      onClick={handleConnect}
+                      disabled={connecting}
+                      className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-on-primary text-xs font-bold hover:bg-primary/90 transition-all shadow-xs active:scale-95"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">person_add</span>
+                      <span>{connecting ? 'Sending Request...' : 'Connect'}</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Profile Bio & Interests */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+              <div className="md:col-span-7 bg-surface border border-outline-variant/30 rounded-3xl p-6 shadow-xs flex flex-col gap-4">
+                <h3 className="font-headline-sm text-base font-bold text-on-surface flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[20px] text-primary">format_quote</span>
+                  <span>About & Background</span>
+                </h3>
+
+                <div className="bg-surface-container-low/70 rounded-2xl p-5 border border-outline-variant/20">
+                  <p className="font-editorial italic text-base md:text-lg text-on-surface/90 leading-relaxed whitespace-pre-wrap">
+                    {targetUser.bio ? `"${targetUser.bio}"` : 'No bio summary provided.'}
+                  </p>
+                </div>
+              </div>
+
+              {targetUser.interests && targetUser.interests.length > 0 && (
+                <div className="md:col-span-5 bg-surface border border-outline-variant/30 rounded-3xl p-6 shadow-xs flex flex-col gap-4">
+                  <h3 className="font-headline-sm text-base font-bold text-on-surface flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[20px] text-secondary">interests</span>
+                    <span>Interests & Topics</span>
+                  </h3>
+                  <div className="flex flex-wrap gap-2 mt-1">
+                    {targetUser.interests.map((int) => (
+                      <Badge key={int.id || int.name} variant="secondary" className="px-3.5 py-1.5 text-xs font-semibold shadow-2xs">
+                        ✓ {int.name}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               )}
-
-              <form onSubmit={handleEditSubmit} className="space-y-4">
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-ink-muted">Full Name *</label>
-                  <input
-                    type="text"
-                    value={editForm.fullName}
-                    onChange={(e) => setEditForm({ ...editForm, fullName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-control bg-surface-recessed text-ink-primary text-sm font-semibold border border-hairline focus:outline-none focus:border-clay"
-                    required
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-ink-muted">College</label>
-                    <input
-                      type="text"
-                      value={editForm.college}
-                      onChange={(e) => setEditForm({ ...editForm, college: e.target.value })}
-                      className="w-full px-3 py-2 rounded-control bg-surface-recessed text-ink-primary text-xs border border-hairline focus:outline-none focus:border-clay"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-ink-muted">Profession</label>
-                    <input
-                      type="text"
-                      value={editForm.profession}
-                      onChange={(e) => setEditForm({ ...editForm, profession: e.target.value })}
-                      className="w-full px-3 py-2 rounded-control bg-surface-recessed text-ink-primary text-xs border border-hairline focus:outline-none focus:border-clay"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-ink-muted">Location</label>
-                  <input
-                    type="text"
-                    value={editForm.location}
-                    onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
-                    className="w-full px-3 py-2 rounded-control bg-surface-recessed text-ink-primary text-xs border border-hairline focus:outline-none focus:border-clay"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-ink-muted">Bio</label>
-                  <textarea
-                    value={editForm.bio}
-                    onChange={(e) => setEditForm({ ...editForm, bio: e.target.value })}
-                    rows={3}
-                    className="w-full px-3.5 py-2 rounded-control bg-surface-recessed text-ink-primary font-body-editorial text-sm border border-hairline focus:outline-none focus:border-clay"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-semibold text-ink-muted">Profile Picture URL</label>
-                  <input
-                    type="url"
-                    value={editForm.profilePicture}
-                    onChange={(e) => setEditForm({ ...editForm, profilePicture: e.target.value })}
-                    className="w-full px-3 py-2 rounded-control bg-surface-recessed text-ink-primary text-xs border border-hairline focus:outline-none focus:border-clay"
-                  />
-                </div>
-
-                <div className="flex items-center justify-end gap-3 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setIsEditModalOpen(false)}
-                    className="px-4 py-2 rounded-control text-sm font-medium text-ink-muted hover:bg-surface-recessed"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={savingProfile}
-                    className="px-5 py-2 rounded-control bg-clay text-white font-semibold text-sm hover:bg-clay-hover disabled:opacity-50 transition-colors shadow-sm"
-                  >
-                    {savingProfile ? 'Saving...' : 'Save Changes'}
-                  </button>
-                </div>
-              </form>
             </div>
           </div>
         )}
       </div>
-    </AppLayout>
+    </Layout>
   );
-};
-
-export default UserProfilePage;
+}

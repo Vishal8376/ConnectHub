@@ -1,11 +1,26 @@
-import client from './client'
+import client from './client';
 
-export function getConversationIdWithUser(userId) {
-  return client.get(`/messages/conversation/user/${userId}`).then((res) => res.data)
-}
+export const getConversationId = async (userId) => {
+  const response = await client.get(`/messages/conversation/user/${userId}`);
+  return response.data; // returns conversation ID number
+};
 
-export function getMessagesByConversation(conversationId) {
-  return client
-    .get(`/messages/conversation/${conversationId}`)
-    .then((res) => res.data)
-}
+export const getMessagesByConversation = async (conversationId) => {
+  const response = await client.get(`/messages/conversation/${conversationId}`);
+  return response.data;
+};
+
+export const getUnreadSummary = async () => {
+  const response = await client.get('/messages/unread-summary');
+  return response.data;
+};
+
+export const markConversationAsRead = async (conversationId) => {
+  const response = await client.put(`/messages/conversation/${conversationId}/read`);
+  return response.data;
+};
+
+export const getUnreadCountForConversation = async (conversationId) => {
+  const response = await client.get(`/messages/conversation/${conversationId}/unread-count`);
+  return response.data;
+};

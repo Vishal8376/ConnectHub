@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PasswordHashGenerator",
+            "request": "launch",
+            "mainClass": "com.example.connecthub.PasswordHashGenerator",
+            "projectName": "connecthub"
+        },
+        {
+            "type": "java",
+            "name": "PasswordGenerator",
+            "request": "launch",
+            "mainClass": "com.example.connecthub.PasswordGenerator",
+            "projectName": "connecthub"
+        },
+        {
+            "type": "java",
             "name": "ConnecthubApplication",
             "request": "launch",
             "mainClass": "com.example.connecthub.ConnecthubApplication"

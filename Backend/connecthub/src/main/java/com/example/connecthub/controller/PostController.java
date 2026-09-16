@@ -90,4 +90,32 @@ public class PostController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/like")
+    public ResponseEntity<PostResponse> likePost(
+            @PathVariable Long id) {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        return ResponseEntity.ok(
+                postService.likePost(id, email)
+        );
+    }
+
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity<PostResponse> unlikePost(
+            @PathVariable Long id) {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        return ResponseEntity.ok(
+                postService.unlikePost(id, email)
+        );
+    }
 }

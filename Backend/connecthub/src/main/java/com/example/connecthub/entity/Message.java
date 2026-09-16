@@ -35,4 +35,8 @@ public class Message {
 
     @Column(nullable = false)
     private LocalDateTime sentAt;
-}
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean isRead = false;
+}

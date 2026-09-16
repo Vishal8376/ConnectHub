@@ -13,7 +13,6 @@ class StompService {
       return;
     }
 
-    // Compute ws/wss protocol relative to current host
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = window.location.host;
     const wsUrl = `${protocol}//${host}/ws`;
@@ -23,20 +22,13 @@ class StompService {
       connectHeaders: {
         Authorization: `Bearer ${token}`,
       },
-      debug: (str) => {
-        // Uncomment for STOMP debugging if needed
-        // console.log('[STOMP]', str);
-      },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
     });
 
-    this.client.onConnect = (frame) => {
-      console.log('Connected to WebSocket STOMP broker');
+    this.client.onConnect = () => {
       this.isConnected = true;
-
-      // Subscribe to user queue messages
       this.subscription = this.client.subscribe(
         '/user/queue/messages',
         (message) => {
@@ -53,7 +45,6 @@ class StompService {
     };
 
     this.client.onStompError = (frame) => {
-      console.error('STOMP error:', frame.headers['message'], frame.body);
       this.isConnected = false;
       if (onError) {
         onError(frame.headers['message'] || 'WebSocket connection error');

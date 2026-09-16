@@ -1,81 +1,70 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import client from '../api/client';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { getCurrentUser } from '../api/users';
+import { loginUser } from '../api/auth';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || null);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(() => localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
-  // Fetch logged-in user profile on load or token change
-  useEffect(() => {
-    const fetchMe = async () => {
-      if (!token) {
-        setCurrentUser(null);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const response = await client.get('/users/me');
-        setCurrentUser(response.data);
-      } catch (err) {
-        console.error('Failed to fetch user profile:', err.message);
-        // Clear invalid token
-        localStorage.removeItem('token');
-        setToken(null);
-        setCurrentUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMe();
+  const fetchCurrentUser = useCallback(async () => {
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+    try {
+      const userData = await getCurrentUser();
+      setUser(userData);
+    } catch (err) {
+      console.error('Failed to fetch current user profile:', err);
+      // Clear token if invalid or expired
+      localStorage.removeItem('token');
+      setToken(null);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   }, [token]);
 
-  const login = async (email, password) => {
-    const response = await client.post('/users/login', { email, password });
-    const { token: jwtToken } = response.data;
-    localStorage.setItem('token', jwtToken);
-    setToken(jwtToken);
-    
-    // Immediately fetch user profile
-    const profileRes = await client.get('/users/me', {
-      headers: { Authorization: `Bearer ${jwtToken}` }
-    });
-    setCurrentUser(profileRes.data);
-    return profileRes.data;
-  };
+  useEffect(() => {
+    fetchCurrentUser();
+  }, [fetchCurrentUser]);
 
-  const register = async (registerData) => {
-    const response = await client.post('/users/register', registerData);
-    return response.data;
-  };
-
-  const updateProfile = async (updateData) => {
-    const response = await client.put('/users/me', updateData);
-    setCurrentUser(response.data);
-    return response.data;
+  const login = async (credentials) => {
+    const data = await loginUser(credentials);
+    const jwt = data.token;
+    localStorage.setItem('token', jwt);
+    setToken(jwt);
+    await fetchCurrentUser();
+    return data;
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     setToken(null);
-    setCurrentUser(null);
+    setUser(null);
+  };
+
+  const refreshProfile = async () => {
+    if (token) {
+      await fetchCurrentUser();
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
+        user,
         token,
-        currentUser,
         loading,
         login,
-        register,
-        updateProfile,
         logout,
-        isAuthenticated: !!currentUser,
+        refreshProfile,
+        isAuthenticated: !!token && !!user,
+        isAdmin: user?.role === 'ADMIN',
       }}
     >
       {children}

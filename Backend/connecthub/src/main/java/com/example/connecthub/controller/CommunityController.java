@@ -2,6 +2,7 @@ package com.example.connecthub.controller;
 
 import com.example.connecthub.dto.request.CreateCommunityRequest;
 import com.example.connecthub.dto.request.UpdateCommunityRequest;
+import com.example.connecthub.dto.response.CommunityJoinRequestResponse;
 import com.example.connecthub.dto.response.CommunityResponse;
 import com.example.connecthub.service.CommunityService;
 import jakarta.validation.Valid;
@@ -108,5 +109,66 @@ public class CommunityController {
         communityService.leaveCommunity(id, email);
 
         return ResponseEntity.ok("Left community successfully");
+    }
+
+    @PostMapping("/{communityId}/join-request")
+    public ResponseEntity<CommunityJoinRequestResponse> createJoinRequest(
+            @PathVariable Long communityId) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return new ResponseEntity<>(
+                communityService.createJoinRequest(communityId, email),
+                HttpStatus.CREATED
+        );
+    }
+
+    @GetMapping("/{communityId}/join-requests")
+    public ResponseEntity<List<CommunityJoinRequestResponse>> getJoinRequests(
+            @PathVariable Long communityId) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return ResponseEntity.ok(
+                communityService.getJoinRequestsForCommunity(communityId, email)
+        );
+    }
+
+    @PutMapping("/join-requests/{requestId}/accept")
+    public ResponseEntity<CommunityJoinRequestResponse> acceptJoinRequest(
+            @PathVariable Long requestId) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return ResponseEntity.ok(
+                communityService.acceptJoinRequest(requestId, email)
+        );
+    }
+
+    @PutMapping("/join-requests/{requestId}/reject")
+    public ResponseEntity<CommunityJoinRequestResponse> rejectJoinRequest(
+            @PathVariable Long requestId) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        return ResponseEntity.ok(
+                communityService.rejectJoinRequest(requestId, email)
+        );
+    }
+
+    @DeleteMapping("/{communityId}/join-request")
+    public ResponseEntity<Void> cancelJoinRequest(
+            @PathVariable Long communityId) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        communityService.cancelJoinRequest(communityId, email);
+
+        return ResponseEntity.noContent().build();
     }
 }

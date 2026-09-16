@@ -1,17 +1,21 @@
-import client from './client'
+import client from './client';
 
-export function getComments(postId) {
-  return client.get(`/posts/${postId}/comments`).then((res) => res.data)
-}
+export const getCommentsByPost = async (postId) => {
+  const response = await client.get(`/posts/${postId}/comments`);
+  return response.data;
+};
 
-export function createComment(postId, content) {
-  return client.post(`/posts/${postId}/comments`, { content }).then((res) => res.data)
-}
+export const createComment = async (postId, data) => {
+  const response = await client.post(`/posts/${postId}/comments`, data);
+  return response.data;
+};
 
-export function updateComment(id, content) {
-  return client.put(`/comments/${id}`, { content }).then((res) => res.data)
-}
+export const updateComment = async (commentId, data) => {
+  const response = await client.put(`/comments/${commentId}`, data);
+  return response.data;
+};
 
-export function deleteComment(id) {
-  return client.delete(`/comments/${id}`)
-}
+export const deleteComment = async (commentId) => {
+  const response = await client.delete(`/comments/${commentId}`);
+  return response.data;
+};

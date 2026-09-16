@@ -6,7 +6,6 @@ import com.example.connecthub.dto.response.PostResponse;
 
 import java.util.List;
 
-
 public interface PostService {
 
     PostResponse createPost(
@@ -28,6 +27,16 @@ public interface PostService {
 
     void deletePost(
             Long id,
+            String email
+    );
+
+    PostResponse likePost(
+            Long postId,
+            String email
+    );
+
+    PostResponse unlikePost(
+            Long postId,
             String email
     );
 }

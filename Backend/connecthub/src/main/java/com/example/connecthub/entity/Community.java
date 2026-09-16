@@ -49,8 +49,10 @@ public class Community {
      * Community Members
      * ==============================
      */
+    @Builder.Default
     @ManyToMany(mappedBy = "communities")
-    private Set<User> users;
+    private Set<User> users = new java.util.HashSet<>();
+
 
     /*
      * ==============================

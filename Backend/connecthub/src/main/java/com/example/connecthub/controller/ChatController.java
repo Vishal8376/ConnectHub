@@ -1,12 +1,15 @@
 package com.example.connecthub.controller;
 
+import com.example.connecthub.dto.request.CommunityMessageRequest;
 import com.example.connecthub.dto.request.MessageRequest;
+import com.example.connecthub.dto.response.CommunityMessageResponse;
 import com.example.connecthub.dto.response.MessageResponse;
 import com.example.connecthub.entity.Conversation;
 import com.example.connecthub.entity.User;
 import com.example.connecthub.exception.ChatAccessDeniedException;
 import com.example.connecthub.exception.UserNotFoundException;
 import com.example.connecthub.repository.UserRepository;
+import com.example.connecthub.service.CommunityMessageService;
 import com.example.connecthub.service.MessageService;
 
 import jakarta.validation.Valid;
@@ -21,6 +24,7 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
 
     private final MessageService messageService;
+    private final CommunityMessageService communityMessageService;
     private final UserRepository userRepository;
     private final SimpMessagingTemplate messagingTemplate;
 
@@ -29,48 +33,60 @@ public class ChatController {
             @Valid MessageRequest request,
             StompHeaderAccessor accessor) {
 
-        String senderEmail =
-                (String) accessor.getSessionAttributes()
-                        .get("userEmail");
+        String senderEmail = (String) accessor.getSessionAttributes().get("userEmail");
 
         if (senderEmail == null) {
-            throw new ChatAccessDeniedException(
-                    "WebSocket user is not authenticated");
+            throw new ChatAccessDeniedException("WebSocket user is not authenticated");
         }
 
         User sender = userRepository.findByEmail(senderEmail)
-                .orElseThrow(() ->
-                        new UserNotFoundException(
-                                "Sender not found"));
+                .orElseThrow(() -> new UserNotFoundException("Sender not found"));
 
-        User receiver = userRepository.findById(
-                request.getReceiverId()
-        ).orElseThrow(() ->
-                new UserNotFoundException(
-                        "Receiver not found"));
+        User receiver = userRepository.findById(request.getReceiverId())
+                .orElseThrow(() -> new UserNotFoundException("Receiver not found"));
 
-        if (!messageService.areUsersConnected(
-                sender, receiver)) {
-
-            throw new ChatAccessDeniedException(
-                    "Users must be connected to start a chat");
+        if (!messageService.areUsersConnected(sender, receiver)) {
+            throw new ChatAccessDeniedException("Users must be connected to start a chat");
         }
 
-        Conversation conversation =
-                messageService.findOrCreateConversation(
-                        sender,
-                        receiver);
+        Conversation conversation = messageService.findOrCreateConversation(sender, receiver);
 
-        MessageResponse response =
-                messageService.saveMessage(
-                        conversation,
-                        sender,
-                        receiver,
-                        request.getContent());
+        MessageResponse response = messageService.saveMessage(
+                conversation,
+                sender,
+                receiver,
+                request.getContent());
 
         messagingTemplate.convertAndSendToUser(
                 receiver.getEmail(),
                 "/queue/messages",
                 response);
+    }
+
+    @MessageMapping("/community-chat")
+    public void sendCommunityMessage(
+            @Valid CommunityMessageRequest request,
+            StompHeaderAccessor accessor) {
+
+        String senderEmail = (String) accessor.getSessionAttributes().get("userEmail");
+
+        if (senderEmail == null) {
+            throw new ChatAccessDeniedException("WebSocket user is not authenticated");
+        }
+
+        if (!communityMessageService.isUserMemberOfCommunity(request.getCommunityId(), senderEmail)) {
+            throw new ChatAccessDeniedException("Only community members can send community chat messages");
+        }
+
+        CommunityMessageResponse response = communityMessageService.saveAndMapCommunityMessage(
+                request.getCommunityId(),
+                senderEmail,
+                request.getContent()
+        );
+
+        messagingTemplate.convertAndSend(
+                "/topic/community/" + request.getCommunityId(),
+                response
+        );
     }
 }

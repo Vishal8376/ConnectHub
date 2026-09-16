@@ -9,4 +9,10 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     List<Message> findByConversationOrderBySentAtAsc(Conversation conversation);
+
+    long countByConversationIdAndReceiverIdAndIsReadFalse(Long conversationId, Long receiverId);
+
+    List<Message> findByConversationIdAndReceiverIdAndIsReadFalse(Long conversationId, Long receiverId);
+
+    List<Message> findByReceiverIdAndIsReadFalse(Long receiverId);
 }

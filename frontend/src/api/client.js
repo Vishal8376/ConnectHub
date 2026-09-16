@@ -7,7 +7,6 @@ const client = axios.create({
   },
 });
 
-// Attach Authorization Bearer token to requests
 client.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -19,7 +18,6 @@ client.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Normalize API errors into user-readable messages
 client.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -35,7 +33,6 @@ client.interceptors.response.use(
         } else if (data.error) {
           message = data.error;
         } else {
-          // Object map of validation errors e.g. { email: "Must be valid", ... }
           const fieldErrors = Object.entries(data)
             .map(([field, err]) => `${field}: ${err}`)
             .join(', ');

@@ -1,234 +1,191 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, GraduationCap, Briefcase, MapPin, Image, ArrowRight } from 'lucide-react';
+import { registerUser } from '../api/users';
 import { useAuth } from '../context/AuthContext';
-import BrandLogo from '../components/common/BrandLogo';
 
-const RegisterPage = () => {
+export default function RegisterPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     password: '',
-    bio: '',
     college: '',
     profession: '',
     location: '',
     profilePicture: '',
+    bio: '',
   });
 
-  const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-
-  const { register, login } = useAuth();
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.password) {
-      setError('Full Name, Email, and Password are required.');
-      return;
-    }
+    if (!formData.email || !formData.password || !formData.fullName) return;
 
     setSubmitting(true);
-    setError(null);
+    setError('');
 
     try {
-      await register(formData);
-      // Auto login after registration
-      await login(formData.email, formData.password);
+      await registerUser(formData);
+      // Auto-login upon successful registration
+      await login({ email: formData.email, password: formData.password });
       navigate('/');
     } catch (err) {
-      setError(err.message || 'Registration failed. Please check your inputs.');
+      setError(err.message || 'Registration failed');
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-canvas flex flex-col md:flex-row">
-      {/* Left Panel */}
-      <div className="md:w-1/2 bg-surface-elevated p-8 lg:p-16 flex flex-col justify-between border-r border-hairline relative overflow-hidden">
-        <div>
-          <BrandLogo size="lg" link={false} />
-        </div>
-
-        <div className="my-12 space-y-6 max-w-lg">
-          <h1 className="font-display-lg text-ink-primary font-bold leading-tight">
-            Join interest-based communities.
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 py-8">
+      <div className="bg-surface border border-outline-variant/30 rounded-3xl p-8 max-w-lg w-full shadow-md">
+        <div className="flex flex-col items-center text-center mb-6">
+          <div className="w-14 h-14 rounded-2xl bg-primary text-on-primary font-bold flex items-center justify-center text-3xl shadow-xs mb-3">
+            C
+          </div>
+          <h1 className="font-headline-lg text-2xl font-bold text-on-surface">
+            Join Connect<span className="text-primary">Hub</span>
           </h1>
-          <p className="font-body-editorial text-ink-muted text-xl leading-relaxed">
-            Create your profile to start connecting, sharing knowledge, and building lasting professional networks.
+          <p className="text-xs text-on-surface-variant mt-1 font-medium">
+            Build meaningful professional relationships with your peers
           </p>
         </div>
 
-        <div className="text-xs text-ink-subtle">
-          © {new Date().getFullYear()} ConnectHub. All rights reserved.
-        </div>
-      </div>
+        {error && (
+          <div className="mb-6 p-3 bg-error-container text-on-error-container text-xs rounded-xl font-medium text-center">
+            {error}
+          </div>
+        )}
 
-      {/* Right Panel — Form */}
-      <div className="md:w-1/2 p-6 lg:p-12 flex items-center justify-center overflow-y-auto">
-        <div className="w-full max-w-md space-y-6 py-8">
-          <div className="space-y-2">
-            <h2 className="font-headline-lg text-ink-primary font-bold">Create your account</h2>
-            <p className="font-body-md text-ink-muted">
-              Enter your details to register on ConnectHub.
-            </p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-on-surface">Full Name *</label>
+            <input
+              type="text"
+              name="fullName"
+              required
+              value={formData.fullName}
+              onChange={handleChange}
+              placeholder="e.g. Arjun Sharma"
+              className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+            />
           </div>
 
-          {error && (
-            <div className="p-4 rounded-control bg-red-50 text-red-700 text-sm border border-red-200">
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Full Name *</label>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                <User className="w-4 h-4 text-ink-subtle shrink-0" />
-                <input
-                  type="text"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Elena Rostova"
-                  className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Email Address *</label>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                <Mail className="w-4 h-4 text-ink-subtle shrink-0" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="elena@university.edu"
-                  className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Password *</label>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                <Lock className="w-4 h-4 text-ink-subtle shrink-0" />
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="••••••••"
-                  className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-ink-muted">College / University</label>
-                <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                  <GraduationCap className="w-4 h-4 text-ink-subtle shrink-0" />
-                  <input
-                    type="text"
-                    name="college"
-                    value={formData.college}
-                    onChange={handleChange}
-                    placeholder="Stanford"
-                    className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-ink-muted">Profession / Role</label>
-                <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                  <Briefcase className="w-4 h-4 text-ink-subtle shrink-0" />
-                  <input
-                    type="text"
-                    name="profession"
-                    value={formData.profession}
-                    onChange={handleChange}
-                    placeholder="Design Lead"
-                    className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Location</label>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                <MapPin className="w-4 h-4 text-ink-subtle shrink-0" />
-                <input
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  placeholder="San Francisco, CA"
-                  className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Bio</label>
-              <textarea
-                name="bio"
-                value={formData.bio}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">Email Address *</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
                 onChange={handleChange}
-                rows={2}
-                placeholder="Share a short summary about your background and interests..."
-                className="w-full px-3.5 py-2 rounded-control bg-surface-recessed text-ink-primary text-sm placeholder-ink-subtle border border-transparent focus:bg-canvas focus:border-clay focus:outline-none"
+                placeholder="arjun@example.com"
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
               />
             </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-ink-muted">Profile Picture URL</label>
-              <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-control bg-surface-recessed border border-transparent focus-within:bg-canvas focus-within:border-clay">
-                <Image className="w-4 h-4 text-ink-subtle shrink-0" />
-                <input
-                  type="url"
-                  name="profilePicture"
-                  value={formData.profilePicture}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                  className="w-full bg-transparent text-ink-primary text-sm focus:outline-none"
-                />
-              </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">Password *</label>
+              <input
+                type="password"
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+              />
             </div>
+          </div>
 
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full py-3.5 px-4 rounded-control bg-clay text-white font-semibold text-sm hover:bg-clay-hover disabled:opacity-50 transition-colors flex items-center justify-center gap-2 shadow-sm pt-3"
-            >
-              {submitting ? 'Creating account...' : 'Create Account'}
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">Profession / Role</label>
+              <input
+                type="text"
+                name="profession"
+                value={formData.profession}
+                onChange={handleChange}
+                placeholder="e.g. Software Engineer"
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">College / Organization</label>
+              <input
+                type="text"
+                name="college"
+                value={formData.college}
+                onChange={handleChange}
+                placeholder="e.g. Stanford University"
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+              />
+            </div>
+          </div>
 
-          <div className="pt-4 border-t border-hairline text-center text-sm">
-            <span className="text-ink-muted">Already registered? </span>
-            <Link to="/login" className="font-semibold text-clay hover:underline">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">Location</label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="e.g. San Francisco, CA"
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-bold text-on-surface">Profile Picture URL</label>
+              <input
+                type="url"
+                name="profilePicture"
+                value={formData.profilePicture}
+                onChange={handleChange}
+                placeholder="https://images.unsplash.com/..."
+                className="bg-surface-container-low border border-outline-variant/30 rounded-xl px-3.5 py-2.5 text-sm text-on-surface outline-none focus:border-primary"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-on-surface">Bio / Summary</label>
+            <textarea
+              name="bio"
+              rows={2}
+              value={formData.bio}
+              onChange={handleChange}
+              placeholder="Tell the community a little about your background..."
+              className="bg-surface-container-low border border-outline-variant/30 rounded-xl p-3 text-sm text-on-surface outline-none focus:border-primary resize-none leading-relaxed"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="mt-3 py-3 rounded-full bg-primary text-on-primary font-bold text-sm hover:bg-primary/90 transition-all shadow-xs active:scale-95 disabled:opacity-50"
+          >
+            {submitting ? 'Creating Account...' : 'Complete Registration'}
+          </button>
+        </form>
+
+        <div className="mt-6 pt-5 border-t border-outline-variant/20 text-center">
+          <p className="text-xs text-on-surface-variant font-medium">
+            Already have an account?{' '}
+            <Link to="/login" className="font-bold text-primary hover:underline">
               Sign In
             </Link>
-          </div>
+          </p>
         </div>
       </div>
     </div>
   );
-};
-
-export default RegisterPage;
+}

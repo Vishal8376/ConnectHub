@@ -1,6 +1,7 @@
 package com.example.connecthub.service;
 
 import com.example.connecthub.dto.response.MessageResponse;
+import com.example.connecthub.dto.response.UnreadSummaryResponse;
 import com.example.connecthub.entity.Conversation;
 import com.example.connecthub.entity.User;
 
@@ -32,4 +33,15 @@ public interface MessageService {
         Conversation getConversation(
                         User userOne,
                         User userTwo);
+
+        long getUnreadCountForConversation(
+                        Long conversationId,
+                        String email);
+
+        void markConversationAsRead(
+                        Long conversationId,
+                        String email);
+
+        UnreadSummaryResponse getUnreadSummary(
+                        String email);
 }

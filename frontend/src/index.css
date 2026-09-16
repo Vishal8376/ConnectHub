@@ -3,133 +3,30 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    background-color: #FDFBF7;
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #FAF7F2;
     color: #1F2421;
-    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 }
 
-/* Custom Typography Utility Classes from DESIGN.md */
-.font-display-lg {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 44px;
-  font-weight: 700;
-  line-height: 52px;
-  letter-spacing: -0.03em;
+/* Custom scrollbar hide for horizontal carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@media (max-width: 768px) {
-  .font-display-lg {
-    font-size: 34px;
-    line-height: 42px;
-    letter-spacing: -0.025em;
-  }
+/* Material symbols outlined helper */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.font-headline-lg {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 38px;
-  letter-spacing: -0.02em;
-}
-
-@media (max-width: 768px) {
-  .font-headline-lg {
-    font-size: 26px;
-    line-height: 34px;
-    letter-spacing: -0.015em;
-  }
-}
-
-.font-headline-md {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 30px;
-  letter-spacing: -0.01em;
-}
-
-.font-headline-sm {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 26px;
-  letter-spacing: -0.005em;
-}
-
-.font-body-editorial {
-  font-family: 'Newsreader', serif;
-  font-size: 19px;
-  font-weight: 400;
-  line-height: 30px;
-  letter-spacing: 0.005em;
-}
-
-.font-body-lg {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 26px;
-  letter-spacing: -0.005em;
-}
-
-.font-body-md {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0;
-}
-
-.font-body-sm {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-  letter-spacing: 0.01em;
-}
-
-.font-label-lg {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0.01em;
-}
-
-.font-label-md {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 16px;
-  letter-spacing: 0.02em;
-}
-
-.font-label-sm {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 14px;
-  letter-spacing: 0.03em;
-}
-
-/* Custom scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #E7E3DC;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #7E8881;
+.material-symbols-outlined.fill-1 {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

@@ -13,6 +13,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
+    List<User> findTop5ByFullNameStartingWithIgnoreCaseOrderByFullNameAsc(String query);
+
+
     @Query("""
             SELECT DISTINCT u
             FROM User u

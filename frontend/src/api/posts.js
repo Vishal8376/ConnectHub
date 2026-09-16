@@ -1,25 +1,41 @@
-import client from './client'
+import client from './client';
 
-export function getPosts() {
-  return client.get('/posts').then((res) => res.data)
-}
+export const getAllPosts = async () => {
+  const response = await client.get('/posts');
+  return response.data;
+};
 
-export function getPost(id) {
-  return client.get(`/posts/${id}`).then((res) => res.data)
-}
+export const getPostById = async (id) => {
+  const response = await client.get(`/posts/${id}`);
+  return response.data;
+};
 
-export function getPostsByCommunity(communityId) {
-  return client.get(`/posts/community/${communityId}`).then((res) => res.data)
-}
+export const getPostsByCommunity = async (communityId) => {
+  const response = await client.get(`/posts/community/${communityId}`);
+  return response.data;
+};
 
-export function createPost(payload) {
-  return client.post('/posts', payload).then((res) => res.data)
-}
+export const createPost = async (data) => {
+  const response = await client.post('/posts', data);
+  return response.data;
+};
 
-export function updatePost(id, payload) {
-  return client.put(`/posts/${id}`, payload).then((res) => res.data)
-}
+export const updatePost = async (id, data) => {
+  const response = await client.put(`/posts/${id}`, data);
+  return response.data;
+};
 
-export function deletePost(id) {
-  return client.delete(`/posts/${id}`)
-}
+export const deletePost = async (id) => {
+  const response = await client.delete(`/posts/${id}`);
+  return response.data;
+};
+
+export const likePost = async (postId) => {
+  const response = await client.post(`/posts/${postId}/like`);
+  return response.data;
+};
+
+export const unlikePost = async (postId) => {
+  const response = await client.delete(`/posts/${postId}/like`);
+  return response.data;
+};

@@ -1,19 +1,21 @@
-import client from './client'
+import client from './client';
 
-export function getMe() {
-  return client.get('/users/me').then((res) => res.data)
-}
+export const registerUser = async (data) => {
+  const response = await client.post('/users/register', data);
+  return response.data;
+};
 
-export function updateMe(payload) {
-  return client.put('/users/me', payload).then((res) => res.data)
-}
+export const getCurrentUser = async () => {
+  const response = await client.get('/users/me');
+  return response.data;
+};
 
-export function searchUsers(params = {}) {
-  const clean = {}
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && String(value).trim() !== '') {
-      clean[key] = value
-    }
-  })
-  return client.get('/users/search', { params: clean }).then((res) => res.data)
-}
+export const updateProfile = async (data) => {
+  const response = await client.put('/users/me', data);
+  return response.data;
+};
+
+export const searchUsers = async (params) => {
+  const response = await client.get('/users/search', { params });
+  return response.data;
+};

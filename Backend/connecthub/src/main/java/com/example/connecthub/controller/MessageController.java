@@ -1,6 +1,7 @@
 package com.example.connecthub.controller;
 
 import com.example.connecthub.dto.response.MessageResponse;
+import com.example.connecthub.dto.response.UnreadSummaryResponse;
 import com.example.connecthub.entity.Conversation;
 import com.example.connecthub.entity.User;
 import com.example.connecthub.exception.ChatAccessDeniedException;
@@ -66,5 +67,36 @@ public class MessageController {
                         otherUser);
 
         return ResponseEntity.ok(conversation.getId());
+    }
+
+    @GetMapping("/conversation/{conversationId}/unread-count")
+    public ResponseEntity<Long> getUnreadCountForConversation(
+            @PathVariable Long conversationId,
+            Principal principal) {
+
+        return ResponseEntity.ok(
+                messageService.getUnreadCountForConversation(
+                        conversationId,
+                        principal.getName()
+                )
+        );
+    }
+
+    @PutMapping("/conversation/{conversationId}/read")
+    public ResponseEntity<Void> markConversationAsRead(
+            @PathVariable Long conversationId,
+            Principal principal) {
+
+        messageService.markConversationAsRead(conversationId, principal.getName());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/unread-summary")
+    public ResponseEntity<UnreadSummaryResponse> getUnreadSummary(
+            Principal principal) {
+
+        return ResponseEntity.ok(
+                messageService.getUnreadSummary(principal.getName())
+        );
     }
 }
