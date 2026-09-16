@@ -43,8 +43,8 @@ public class SecurityConfig {
 
                 CorsConfiguration configuration = new CorsConfiguration();
 
-                configuration.setAllowedOrigins(
-                                List.of("http://localhost:5174"));
+                configuration.setAllowedOriginPatterns(
+                                List.of("*"));
 
                 configuration.setAllowedMethods(
                                 List.of(
@@ -92,6 +92,7 @@ public class SecurityConfig {
 
                                                 // Public APIs
                                                 .requestMatchers(
+                                                                "/api/health",
                                                                 "/api/users/register",
                                                                 "/api/users/login")
                                                 .permitAll()
